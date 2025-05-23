@@ -1,0 +1,161 @@
+projects/
+│   ├── page.tsx              # Liste des projets
+│   ├── create/
+│   │   └── page.tsx          # Créer un projet
+│   ├── [projectId]/
+│   │   ├── page.tsx          # Détails du projet
+│   │   ├── edit/
+│   │   │   └── page.tsx      # Modifier le projet
+│   │   ├── features/
+│   │   │   ├── page.tsx      # Liste des features
+│   │   │   ├── create/
+│   │   │   │   └── page.tsx  # Créer une feature
+│   │   │   └── [featureId]/
+│   │   │       ├── page.tsx  # Détails de la feature
+│   │   │       └── edit/
+│   │   │           └── page.tsx # Modifier la feature
+│   │   ├── user-stories/
+│   │   │   ├── page.tsx      # Liste des user stories
+│   │   │   ├── create/
+│   │   │   │   └── page.tsx  # Créer une user story
+│   │   │   └── [storyId]/
+│   │   │       ├── page.tsx  # Détails de la user story
+│   │   │       └── edit/
+│   │   │           └── page.tsx # Modifier la user story
+│   │   ├── tasks/
+│   │   │   ├── page.tsx      # Vue Kanban des tâches
+│   │   │   ├── list/
+│   │   │   │   └── page.tsx  # Vue liste des tâches
+│   │   │   ├── create/
+│   │   │   │   └── page.tsx  # Créer une tâche
+│   │   │   └── [taskId]/
+│   │   │       ├── page.tsx  # Détails de la tâche
+│   │   │       └── edit/
+│   │   │           └── page.tsx # Modifier la tâche
+│   │   ├── sprints/
+│   │   │   ├── page.tsx      # Gestion des sprints
+│   │   │   ├── create/
+│   │   │   │   └── page.tsx  # Créer un sprint
+│   │   │   └── [sprintId]/
+│   │   │       └── page.tsx  # Détails du sprint
+│   │   ├── files/
+│   │   │   ├── page.tsx      # Gestion des fichiers
+│   │   │   └── upload/
+│   │   │       └── page.tsx  # Upload de fichiers
+│   │   ├── schema/
+│   │   │   ├── page.tsx      # Gestion des schémas
+│   │   │   └── create/
+│   │   │       └── page.tsx  # Créer un schéma
+│   │   └── reports/
+│   │       ├── page.tsx      # Rapports du projet
+│   │       ├── burndown/
+│   │       │   └── page.tsx  # Burndown chart
+│   │       └── activity/
+│   │           └── page.tsx  # Journal d'activité
+
+
+
+
+teams/
+│   ├── page.tsx              # Liste des équipes
+│   ├── create/
+│   │   └── page.tsx          # Créer une équipe
+│   └── [teamId]/
+│       ├── page.tsx          # Détails de l'équipe
+│       ├── edit/
+│       │   └── page.tsx      # Modifier l'équipe
+│       ├── members/
+│       │   ├── page.tsx      # Gestion des membres
+│       │   └── invite/
+│       │       └── page.tsx  # Inviter des membres
+│       └── projects/
+│           └── page.tsx      # Projets de l'équipe
+
+
+profile/
+│   ├── page.tsx              # Profil utilisateur
+│   ├── edit/
+│   │   └── page.tsx          # Modifier le profil
+│   ├── settings/
+│   │   └── page.tsx          # Paramètres utilisateur
+│   └── time-tracking/
+│       └── page.tsx          # Suivi du temps personnel
+├── users/
+│   ├── page.tsx              # Liste des utilisateurs (admin)
+│   └── [userId]/
+│       └── page.tsx          # Profil public utilisateur
+
+
+app/
+├── reports/
+│   ├── page.tsx              # Dashboard des rapports
+│   ├── projects/
+│   │   └── page.tsx          # Rapports par projet
+│   ├── teams/
+│   │   └── page.tsx          # Rapports par équipe
+│   ├── users/
+│   │   └── page.tsx          # Rapports par utilisateur
+│   └── time-tracking/
+│       └── page.tsx          # Rapports de temps
+
+
+app/
+├── admin/
+│   ├── page.tsx              # Dashboard admin
+│   ├── users/
+│   │   ├── page.tsx          # Gestion des utilisateurs
+│   │   └── [userId]/
+│   │       └── page.tsx      # Détails utilisateur admin
+│   ├── teams/
+│   │   └── page.tsx          # Gestion des équipes
+│   ├── projects/
+│   │   └── page.tsx          # Gestion des projets
+│   ├── activity-logs/
+│   │   └── page.tsx          # Logs d'activité système
+│   └── settings/
+│       └── page.tsx          # Paramètres système
+
+
+app/
+├── roadmap/
+│   ├── page.tsx              # Vue générale de la roadmap
+│   ├── create/
+│   │   └── page.tsx          # Créer un élément de roadmap
+│   └── [roadmapId]/
+│       ├── page.tsx          # Détails de l'élément
+│       └── edit/
+│           └── page.tsx      # Modifier l'élément
+
+
+app/
+├── api/
+│   ├── auth/
+│   │   ├── login/route.ts
+│   │   ├── register/route.ts
+│   │   └── verify/route.ts
+│   ├── projects/
+│   │   ├── route.ts          # GET/POST projects
+│   │   └── [projectId]/
+│   │       ├── route.ts      # GET/PUT/DELETE project
+│   │       ├── features/route.ts
+│   │       ├── tasks/route.ts
+│   │       └── sprints/route.ts
+│   ├── teams/
+│   │   ├── route.ts
+│   │   └── [teamId]/
+│   │       └── route.ts
+│   ├── users/
+│   │   ├── route.ts
+│   │   └── [userId]/
+│   │       └── route.ts
+│   ├── files/
+│   │   ├── upload/route.ts
+│   │   └── [fileId]/route.ts
+│   └── roadmap/
+│       ├── route.ts
+│       └── [roadmapId]/route.ts
+
+
+
+
+

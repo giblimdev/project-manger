@@ -1,0 +1,425 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum Role {
+  USER
+  READER
+  AUTHOR
+  DEV
+  ADMIN
+}
+
+enum Status {
+  TODO
+  IN_PROGRESS
+  REVIEW
+  DONE
+  BLOCKED
+  CANCELLED
+}
+
+enum FileType {
+  PAGE
+  COMPONENT
+  UTIL
+  LIB
+  STORE
+  DOCUMENT
+  IMAGE
+  SPREADSHEET
+  PRESENTATION
+  ARCHIVE
+  CODE
+  OTHER
+}
+
+enum ActionType {
+  CREATE
+  UPDATE
+  DELETE
+}
+
+enum SprintStatus {
+  PLANNED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum FieldType {
+  STRING
+  INTEGER
+  BOOLEAN
+  DATE
+  DATETIME
+  FLOAT
+  JSON
+  TEXT
+  UUID
+}
+
+// Models
+model User {
+  id            String   @id @default(uuid())
+  name          String?
+  email         String?  @unique
+  emailVerified Boolean  @default(false)
+  image         String?
+  role          Role     @default(USER)
+  lang          String?  @default("en")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  sessions           Session[]
+  accounts           Account[]
+  verifications      Verification[]
+  projects           Project[] // Many-to-many direct avec Project
+  createdProjects    Project[]      @relation("ProjectCreator")
+  createdFeatures    Feature[]      @relation("FeatureCreator")
+  createdUserStories UserStory[]    @relation("UserStoryCreator")
+  assignedTasks      Task[]         @relation("TaskAssignee")
+  authoredComments   Comment[]      @relation("CommentAuthor")
+  timeLogs           TimeLog[]
+  activityLogs       ActivityLog[]
+  uploadedFiles      File[]
+  createdTeams       Team[]         @relation("TeamCreator")
+  memberTeams        Team[]         @relation("TeamMembers")
+  RoadMap            RoadMap[]      @relation("RoadMapCreator")
+
+  @@index([email])
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_sessions")
+}
+
+model Account {
+  id                    String    @id @default(uuid())
+  userId                String
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  idToken               String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_accounts")
+}
+
+model Verification {
+  id         String   @id @default(uuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userId     String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_verifications")
+}
+
+model Team {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  image       String?
+  privileges  String?
+  teamType    String // organisation, service, teamProject
+  creatorId   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  creator  User?     @relation("TeamCreator", fields: [creatorId], references: [id], onDelete: SetNull)
+  members  User[]    @relation("TeamMembers") // Many-to-many direct avec User
+  projects Project[] // Many-to-many direct avec Project
+
+  @@map("teams")
+}
+
+model Project {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  image       String?
+  status      Status    @default(TODO)
+  priority    Int       @default(1)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  creatorId   String?
+
+  creator        User?           @relation("ProjectCreator", fields: [creatorId], references: [id], onDelete: SetNull)
+  users          User[] // Many-to-many direct avec User
+  teams          Team[] // Many-to-many direct avec Team
+  features       Feature[]
+  userStories    UserStory[]
+  sprints        Sprint[]
+  files          File[]
+  comments       Comment[]
+  projectSchemas ProjectSchema[]
+  RoadMap        RoadMap[]
+
+  @@index([name])
+  @@index([status])
+  @@map("projects")
+}
+
+model RoadMap {
+  id            String    @id @default(uuid())
+  title         String
+  description   String
+  phase         String // "Setup", "Authentication", "Core", etc.
+  estimatedDays Int
+  progress      Int       @default(0) // 0-100
+  deliverables  String // JSON array des livrables
+  technologies  String // JSON array des technologies
+  dependencies  String // JSON array des IDs de dépendances
+  priority      String // "High", "Medium", "Low"
+  startDate     DateTime?
+  endDate       DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  projectId     String?
+  creatorId     String?
+
+  // Relations
+  project  Project?  @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  creator  User?     @relation("RoadMapCreator", fields: [creatorId], references: [id], onDelete: SetNull)
+  comments Comment[]
+  files    File[]
+
+  @@index([phase])
+  @@index([priority])
+  @@map("roadmaps")
+}
+
+model Feature {
+  id              String    @id @default(uuid())
+  name            String
+  description     String?
+  status          Status    @default(TODO)
+  priority        Int       @default(1)
+  startDate       DateTime?
+  endDate         DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  projectId       String
+  creatorId       String
+  parentFeatureId String?
+
+  project       Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  creator       User      @relation("FeatureCreator", fields: [creatorId], references: [id], onDelete: Cascade)
+  parentFeature Feature?  @relation("FeatureHierarchy", fields: [parentFeatureId], references: [id], onDelete: SetNull)
+  childFeatures Feature[] @relation("FeatureHierarchy")
+  tasks         Task[]
+  comments      Comment[]
+
+  @@map("features")
+}
+
+model UserStory {
+  id                String    @id @default(uuid())
+  title             String
+  goal              String?
+  name              String
+  description       String?
+  status            Status    @default(TODO)
+  priority          Int       @default(1)
+  startDate         DateTime?
+  endDate           DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  projectId         String
+  creatorId         String
+  parentUserStoryId String?
+
+  project          Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  creator          User        @relation("UserStoryCreator", fields: [creatorId], references: [id], onDelete: Cascade)
+  parentUserStory  UserStory?  @relation("UserStoryHierarchy", fields: [parentUserStoryId], references: [id], onDelete: SetNull)
+  childUserStories UserStory[] @relation("UserStoryHierarchy")
+  tasks            Task[]
+  comments         Comment[]
+
+  @@map("user_stories")
+}
+
+model Sprint {
+  id        String       @id @default(uuid())
+  name      String
+  startDate DateTime
+  endDate   DateTime
+  status    SprintStatus @default(PLANNED)
+  projectId String
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("sprints")
+}
+
+model Task {
+  id           String    @id @default(uuid())
+  title        String
+  description  String?
+  status       Status    @default(TODO)
+  priority     Int       @default(1)
+  dueDate      DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  assigneeId   String?
+  storyId      String
+  featureId    String?
+  parentTaskId String?
+
+  assignee   User?     @relation("TaskAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+  story      UserStory @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  feature    Feature?  @relation(fields: [featureId], references: [id], onDelete: SetNull)
+  parentTask Task?     @relation("TaskHierarchy", fields: [parentTaskId], references: [id], onDelete: SetNull)
+  childTasks Task[]    @relation("TaskHierarchy")
+  timeLogs   TimeLog[]
+  comments   Comment[]
+
+  @@map("tasks")
+}
+
+// Schéma unifié pour les bases de données avec hiérarchie
+model ProjectSchema {
+  id          String   @id @default(uuid())
+  projectId   String
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  project      Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  schemaFields SchemaField[]
+
+  @@map("project_schemas")
+}
+
+model SchemaField {
+  id              String     @id @default(uuid())
+  projectSchemaId String
+  name            String
+  fieldType       FieldType? // NULL pour schema et table, défini pour les champs
+  isRequired      Boolean    @default(false)
+  isUnique        Boolean    @default(false)
+  defaultValue    String?
+  description     String?
+  comment         String?
+  order           Int        @default(100)
+  parentFieldId   String? // NULL = Schema racine, 1 parent = Table, 2 parents = Champ
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  projectSchema ProjectSchema @relation(fields: [projectSchemaId], references: [id], onDelete: Cascade)
+  parentField   SchemaField?  @relation("FieldHierarchy", fields: [parentFieldId], references: [id], onDelete: Cascade)
+  childFields   SchemaField[] @relation("FieldHierarchy")
+
+  @@map("schema_fields")
+}
+
+model TimeLog {
+  id        String   @id @default(uuid())
+  duration  Int // en minutes
+  createdAt DateTime @default(now())
+  userId    String
+  taskId    String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@map("time_logs")
+}
+
+model Comment {
+  id              String   @id @default(uuid())
+  title           String
+  content         String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  authorId        String
+  parentCommentId String?
+  projectId       String?
+  featureId       String?
+  userStoryId     String?
+  taskId          String?
+
+  author        User       @relation("CommentAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  parentComment Comment?   @relation("CommentHierarchy", fields: [parentCommentId], references: [id], onDelete: SetNull)
+  childComments Comment[]  @relation("CommentHierarchy")
+  project       Project?   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  feature       Feature?   @relation(fields: [featureId], references: [id], onDelete: Cascade)
+  userStory     UserStory? @relation(fields: [userStoryId], references: [id], onDelete: Cascade)
+  task          Task?      @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  RoadMap       RoadMap[]
+
+  @@map("comments")
+}
+
+model File {
+  id           String   @id @default(uuid())
+  name         String
+  extension    String?
+  url          String
+  type         FileType
+  import       String?
+  export       String?
+  createdAt    DateTime @default(now())
+  creator      String?
+  projectId    String
+  uploaderId   String
+  parentFileId String?
+
+  project    Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  uploader   User      @relation(fields: [uploaderId], references: [id], onDelete: Cascade)
+  parentFile File?     @relation("FileHierarchy", fields: [parentFileId], references: [id], onDelete: SetNull)
+  childFiles File[]    @relation("FileHierarchy")
+  RoadMap    RoadMap[]
+
+  @@map("files")
+}
+
+model ActivityLog {
+  id        String     @id @default(uuid())
+  type      ActionType
+  message   String
+  createdAt DateTime   @default(now())
+  userId    String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("activity_logs")
+}
