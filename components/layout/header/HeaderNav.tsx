@@ -1,9 +1,17 @@
 // components/navigation/NavigationButtons.tsx
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { FolderKanban, Users, Code2, Route, Database } from "lucide-react";
+import {
+  FolderKanban,
+  Users,
+  Code2,
+  Route,
+  Database,
+  Menu,
+  X,
+} from "lucide-react";
 
 interface NavigationItem {
   title: string;
@@ -12,6 +20,8 @@ interface NavigationItem {
 }
 
 export default function NavigationButtons() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const navigationItems: NavigationItem[] = [
     {
       title: "Gestion de projet",
@@ -20,7 +30,7 @@ export default function NavigationButtons() {
     },
     {
       title: "Mon organisation",
-      link: "/use/teams",
+      link: "/user/teams",
       icon: Users,
     },
     {
@@ -30,7 +40,7 @@ export default function NavigationButtons() {
     },
     {
       title: "Road Map",
-      link: "/dev/roadMap",
+      link: "/dev/roadmap",
       icon: Route,
     },
     {
@@ -41,19 +51,58 @@ export default function NavigationButtons() {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 p-6">
-      {navigationItems.map((item) => {
-        const Icon = item.icon;
+    <>
+      {/* Menu desktop - icônes et liens sur la même ligne */}
+      <div className="hidden md:flex items-center space-x-6 p-6">
+        {navigationItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <Link
+              key={item.title}
+              href={item.link}
+              className="flex items-center space-x-2 p-3 border rounded-lg hover:shadow-md transition-shadow"
+            >
+              <Icon className="w-5 h-5" />
+              <span className="text-sm font-medium">{item.title}</span>
+            </Link>
+          );
+        })}
+      </div>
 
-        return (
-          <Link key={item.title} href={item.link}>
-            <div className="p-6 border rounded-lg hover:shadow-md">
-              <Icon className="w-3 h-3 mb-1" />
-              <h3 className="">{item.title}</h3>
-            </div>
-          </Link>
-        );
-      })}
-    </div>
+      {/* Menu mobile - burger */}
+      <div className="md:hidden p-4">
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="flex items-center space-x-2 p-3 border rounded-lg"
+        >
+          {isMenuOpen ? (
+            <X className="w-5 h-5" />
+          ) : (
+            <Menu className="w-5 h-5" />
+          )}
+          <span className="text-sm font-medium">Menu</span>
+        </button>
+
+        {/* Menu mobile ouvert */}
+        {isMenuOpen && (
+          <div className="mt-4 space-y-2">
+            {navigationItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.title}
+                  href={item.link}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center space-x-3 p-3 border rounded-lg hover:shadow-md transition-shadow"
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="text-sm font-medium">{item.title}</span>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </>
   );
 }
