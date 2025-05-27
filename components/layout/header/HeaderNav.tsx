@@ -10,7 +10,9 @@ import {
   Route,
   Database,
   Menu,
+  Link as LinkIcon,
   X,
+  ScrollText,
 } from "lucide-react";
 
 interface NavigationItem {
@@ -25,7 +27,7 @@ export default function NavigationButtons() {
   const navigationItems: NavigationItem[] = [
     {
       title: "Gestion de projet",
-      link: "/user/projects",
+      link: "/projects",
       icon: FolderKanban,
     },
     {
@@ -47,6 +49,16 @@ export default function NavigationButtons() {
       title: "Schema",
       link: "/dev/schema",
       icon: Database,
+    },
+    {
+      title: "Liens",
+      link: "/dev/link",
+      icon: LinkIcon,
+    },
+    {
+      title: "Promptes",
+      link: "/dev/promptes",
+      icon: ScrollText,
     },
   ];
 

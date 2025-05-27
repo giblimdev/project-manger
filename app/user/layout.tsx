@@ -20,9 +20,12 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className="min-h-screen">
+        <AnimatedBackground />
+        <Header />
         <div className="flex flex-col min-h-screen">
           <main className="flex-1 container mx-auto px-4 py-6">{children}</main>
         </div>
+        <Footer />
       </body>
     </html>
   );

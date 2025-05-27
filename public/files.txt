@@ -1,7 +1,66 @@
+# routes
+app/api/auth/[...all]/route.ts
+
+app/api/features/route.ts
+app/api/features/[featuresId]/route.ts
+
+app/api/projects/route.ts
+app/api/projects/[projectId]/route.ts
+
+app/api/roadmap/route.ts
+
+app/api/sprints/route.ts
+app/api/sprints/[sprintId]/route.ts
+
+app/api/tasks/route.ts
+app/api/tasks/[taskId]/route.ts
+
+app/api/teams/route.ts
+app/api/teams/[teamId]/route.ts
+
+app/api/user/route.ts
+
+
+app/auth/forgot-password/page.tsx
+app/auth/goodbye/page.tsx
+app/auth/sign-in/page.tsx
+app/auth/sign-up/page.tsx
+app/auth/very-email/page.tsx
+
+
+app/comment/page.tsx
+
+app/dev/architecture/page.tsx
+app/dev/link/page.tsx
+app/dev/roadmap/pages.tsx
+app/dev/schema/page.tsx
+
+app/projects/page.tsx
+app/projects/[projectId]/page.tsx
+
+app/roadmap/page.tsx
+app/roadmap/activitylogs/page.tsx
+app/roadmap/sprints/page.tsx
+app/roadmap/timelog
+app/roadmap/userstories
+
+app/teams/page.tsx
+app/teams/[teamId]/page.tsx
+
+
+app/user/page.tsx
+
+
+
+
+
+
+
+
+
+
 projects/
 │   ├── page.tsx              # Liste des projets
-│   ├── create/
-│   │   └── page.tsx          # Créer un projet
 │   ├── [projectId]/
 │   │   ├── page.tsx          # Détails du projet
 │   │   ├── edit/
@@ -29,7 +88,7 @@ projects/
 │   │   │   ├── create/
 │   │   │   │   └── page.tsx  # Créer une tâche
 │   │   │   └── [taskId]/
-│   │   │       ├── page.tsx  # Détails de la tâche
+│   │   │       ├── page.tsx  # Détails de la  
 │   │   │       └── edit/
 │   │   │           └── page.tsx # Modifier la tâche
 │   │   ├── sprints/
@@ -129,7 +188,7 @@ app/
 
 app/
 ├── api/
-│   ├── auth/
+│   ├── auth/ 
 │   │   ├── login/route.ts
 │   │   ├── register/route.ts
 │   │   └── verify/route.ts
