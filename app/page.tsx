@@ -20,6 +20,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import UserStoreDisplay from "@/components/UserStoreDisplay";
 
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -144,6 +145,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Hero Section */}
       <section className="py-20 px-4">
+        <UserStoreDisplay />
         <Link href="/auth/register">
           <Button variant="outline">Essai gratuit</Button>
         </Link>

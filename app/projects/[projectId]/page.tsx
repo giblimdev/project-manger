@@ -1,104 +1,125 @@
 // app/projects/[projectId]/page.tsx
+
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import { Status } from "@/lib/generated/prisma/client";
-import { statusLabel } from "@/components/models/projects/ProjectForm";
+import { useState, useMemo } from "react";
+import useSWR from "swr";
+import { ProjectList } from "@/components/models/projects/ProjectList";
+import { ProjectFilters } from "@/components/models/projects/ProjectFilters";
 import { Button } from "@/components/ui/button";
+import { LayoutGrid, List as ListIcon } from "lucide-react";
+import { useProjectsStoreHydrated } from "@/hooks/useProjectsStoreHydrated";
+import ProjectNav from "@/components/models/projects/ProjectNav";
+import { ProjectSelected } from "@/components/ProjectSelected";
 
-type Project = {
-  id: string;
-  name: string;
-  description?: string;
-  image?: string;
-  status: Status;
-  priority: number;
-  startDate?: string;
-  endDate?: string;
-  createdAt: string;
-  updatedAt: string;
-  teams?: { id: string; name: string }[];
-  // Ajoute d'autres relations si besoin
-};
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function ProjectDetailPage() {
-  const { projectId } = useParams<{ projectId: string }>();
-  const [project, setProject] = useState<Project | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default function ProjectsPage() {
+  const {
+    data: projects = [],
+    error,
+    isLoading,
+    mutate,
+  } = useSWR("/api/projects", fetcher);
 
-  useEffect(() => {
-    if (!projectId) return;
-    setLoading(true);
-    fetch(`/api/projects?id=${projectId}`)
-      .then(async (res) => {
-        if (!res.ok) throw new Error("Projet introuvable");
-        const data = await res.json();
-        setProject(data);
-        setLoading(false);
-      })
-      .catch((e) => {
-        setError(e.message);
-        setLoading(false);
-      });
-  }, [projectId]);
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState<string | undefined>(undefined);
+  const [view, setView] = useState<"grid" | "list">("grid");
 
-  if (loading) return <div className="p-8">Chargement...</div>;
-  if (error) return <div className="p-8 text-red-500">{error}</div>;
-  if (!project) return <div className="p-8">Projet introuvable.</div>;
+  // ✅ Utilise le hook hydraté
+  const { project: selectedProject } = useProjectsStoreHydrated();
+
+  const filteredProjects = useMemo(() => {
+    let result = projects;
+    if (status) {
+      result = result.filter((p: any) => p.status === status);
+    }
+    if (search) {
+      result = result.filter((p: any) =>
+        p.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+    return result;
+  }, [projects, status, search]);
+
+  const handleRefresh = () => {
+    mutate();
+  };
 
   return (
     <main className="container py-8">
-      <div className="flex flex-col md:flex-row gap-8">
-        {project.image && (
-          <img
-            src={project.image}
-            alt={project.name}
-            className="w-full max-w-xs rounded shadow"
-          />
-        )}
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold mb-2">{project.name}</h1>
-          <div className="flex items-center gap-2 mb-4">
-            <span className="px-2 py-1 text-xs rounded bg-gray-100">
-              Statut : {statusLabel[project.status]}
-            </span>
-            <span className="px-2 py-1 text-xs rounded bg-blue-100 text-blue-800">
-              Priorité : {project.priority}
-            </span>
-          </div>
-          <p className="mb-4 text-gray-700">{project.description}</p>
-          <div className="mb-2 text-sm text-gray-500">
-            Créé le : {new Date(project.createdAt).toLocaleDateString()}
-            {project.startDate && (
-              <> | Début : {new Date(project.startDate).toLocaleDateString()}</>
-            )}
-            {project.endDate && (
-              <> | Fin : {new Date(project.endDate).toLocaleDateString()}</>
-            )}
-          </div>
-          {project.teams && project.teams.length > 0 && (
-            <div className="mb-2">
-              <span className="font-semibold">Équipes : </span>
-              {project.teams.map((team) => (
-                <span
-                  key={team.id}
-                  className="inline-block mr-2 px-2 py-1 bg-gray-200 rounded"
-                >
-                  {team.name}
-                </span>
-              ))}
-            </div>
-          )}
-          {/* Ajoute ici boutons d'édition, d'ajout de tâche, etc. */}
-          <div className="mt-4 flex gap-2">
-            <Button variant="outline">Éditer</Button>
-            <Button variant="destructive">Supprimer</Button>
-          </div>
+      {/* Header avec titre et boutons de vue */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+        <h1 className="text-2xl font-bold">Mes projets</h1>
+        <div className="flex gap-2">
+          <Button
+            variant={view === "grid" ? "default" : "outline"}
+            onClick={() => setView("grid")}
+            aria-label="Vue grille"
+            className="flex items-center gap-2"
+          >
+            <LayoutGrid size={18} />
+            Grille
+          </Button>
+          <Button
+            variant={view === "list" ? "default" : "outline"}
+            onClick={() => setView("list")}
+            aria-label="Vue liste"
+            className="flex items-center gap-2"
+          >
+            <ListIcon size={18} />
+            Liste
+          </Button>
         </div>
       </div>
-      {/* Tu peux ajouter ici des onglets pour tâches, user stories, fichiers, etc. */}
+
+      {/* Composant de filtres */}
+      <ProjectFilters
+        status={status}
+        setStatus={setStatus}
+        search={search}
+        setSearch={setSearch}
+      />
+
+      {/* Gestion des états de chargement et d'erreur */}
+      {isLoading ? (
+        <div className="flex justify-center items-center py-8">
+          <div className="text-gray-600">Chargement des projets...</div>
+        </div>
+      ) : error ? (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+          <div className="text-red-600">Erreur : {error.message}</div>
+        </div>
+      ) : (
+        <ProjectList
+          projects={filteredProjects}
+          view={view}
+          onRefresh={handleRefresh}
+        />
+      )}
+
+      {/* Section projet sélectionné */}
+      <section className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+          <span className="text-sm font-medium text-blue-800">
+            {selectedProject
+              ? `Vous travaillez actuellement sur le projet : ${selectedProject.name}`
+              : "Aucun projet sélectionné"}
+          </span>
+        </div>
+        {selectedProject && selectedProject.description && (
+          <p className="text-sm text-blue-600 mt-2 ml-5">
+            {selectedProject.description}
+          </p>
+        )}
+      </section>
+
+      {/* Navigation et détails du projet */}
+      <section className="mt-8 space-y-6">
+        <ProjectNav />
+        <ProjectSelected />
+      </section>
     </main>
   );
 }

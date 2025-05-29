@@ -190,8 +190,8 @@ model Projects {
   comments     Comments[]
   schemaFields SchemaFields[]
   roadMaps     RoadMap[]
-  tasks        Tasks[] // ← NOUVELLE RELATION DIRECTE
-  timeLogs     TimeLog[] // ← NOUVELLE RELATION DIRECTE
+  tasks        Tasks[]
+  timeLogs     TimeLog[]
 
   @@index([name])
   @@index([status])

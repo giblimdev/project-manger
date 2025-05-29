@@ -36,8 +36,8 @@ export default function NavigationButtons() {
       icon: Users,
     },
     {
-      title: "Architecture",
-      link: "/dev/architecture",
+      title: "Features",
+      link: "/dev/features",
       icon: Code2,
     },
     {

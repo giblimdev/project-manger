@@ -1,28 +1,16 @@
 // app/projects/page.tsx
+
 "use client";
 
 import { useState, useMemo } from "react";
-import useSWR, { mutate } from "swr";
-import { useProjectsStore } from "@/stores/useProjectsStore";
+import useSWR from "swr";
 import { ProjectList } from "@/components/models/projects/ProjectList";
 import { ProjectFilters } from "@/components/models/projects/ProjectFilters";
-import { ProjectForm } from "@/components/models/projects/ProjectForm";
 import { Button } from "@/components/ui/button";
-import { useModal } from "@/hooks/use-Modal";
-import { LayoutGrid, List as ListIcon, Plus } from "lucide-react";
-
-// Fonction pour nettoyer les données avant POST
-function cleanProjectData(data: any) {
-  return Object.fromEntries(
-    Object.entries(data).filter(
-      ([, v]) =>
-        v !== undefined &&
-        v !== null &&
-        (typeof v !== "string" || v.trim() !== "") &&
-        (!Array.isArray(v) || v.length > 0)
-    )
-  );
-}
+import { LayoutGrid, List as ListIcon } from "lucide-react";
+import { useProjectsStore } from "@/stores/useProjectStore";
+import ProjectNav from "@/components/models/projects/ProjectNav";
+import { ProjectSelected } from "@/components/ProjectSelected";
 
 // Fetcher pour SWR
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -33,18 +21,16 @@ export default function ProjectsPage() {
     data: projects = [],
     error,
     isLoading,
+    mutate,
   } = useSWR("/api/projects", fetcher);
-
-  // Store pour le projet sélectionné
-  const { setProject, setProjectId } = useProjectsStore();
 
   // État local pour la recherche, filtres et vue
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<string | undefined>(undefined);
   const [view, setView] = useState<"grid" | "list">("grid");
 
-  // Modale de création de projet
-  const modal = useModal();
+  // Store pour le projet sélectionné
+  const { project: selectedProject } = useProjectsStore();
 
   // Filtrage local
   const filteredProjects = useMemo(() => {
@@ -60,31 +46,9 @@ export default function ProjectsPage() {
     return result;
   }, [projects, status, search]);
 
-  // Handler création projet (ouvre la modale)
-  const onCreateProject = () => modal.open();
-
-  // Handler soumission du formulaire avec rafraîchissement SWR
-  const handleProjectSubmit = async (data: any) => {
-    try {
-      const response = await fetch("/api/projects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cleanProjectData(data)),
-      });
-
-      if (!response.ok) {
-        throw new Error("Erreur lors de la création du projet");
-      }
-
-      // Ferme la modale
-      modal.close();
-
-      // Rafraîchit les données via SWR
-      mutate("/api/projects");
-    } catch (error) {
-      console.error("Erreur:", error);
-      // Gestion d'erreur ici (toast, notification, etc.)
-    }
+  // Fonction de rafraîchissement pour ProjectList
+  const handleRefresh = () => {
+    mutate();
   };
 
   return (
@@ -117,50 +81,43 @@ export default function ProjectsPage() {
       />
 
       {isLoading ? (
-        <div>Chargement...</div>
+        <div className="flex justify-center items-center py-8">
+          <div className="text-gray-600">Chargement...</div>
+        </div>
       ) : error ? (
-        <div className="text-red-500">Erreur : {error.message}</div>
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+          <div className="text-red-600">Erreur : {error.message}</div>
+        </div>
       ) : (
         <ProjectList
           projects={filteredProjects}
           view={view}
-          onSelectProject={(project) => {
-            setProject(project);
-            setProjectId(project.id);
-          }}
+          onRefresh={handleRefresh}
         />
       )}
 
-      {/* Bouton d'ajout en bas à droite */}
-      <div className="flex justify-end mt-8">
-        <Button onClick={onCreateProject} className="flex items-center gap-2">
-          <Plus size={18} />
-          Nouveau projet
-        </Button>
-      </div>
-
-      {/* Modale de création de projet */}
-      {modal.isOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
-          onClick={modal.onBackdropClick}
-        >
-          <div
-            ref={modal.dialogRef}
-            tabIndex={-1}
-            className="bg-white p-6 rounded-lg shadow-lg min-w-[320px] max-w-lg"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 className="text-xl font-bold mb-4">Créer un projet</h2>
-            <ProjectForm onSubmit={handleProjectSubmit} />
-            <div className="flex justify-end mt-4">
-              <Button variant="outline" onClick={modal.close}>
-                Annuler
-              </Button>
-            </div>
-          </div>
+      {/* Section affichant le projet actuellement sélectionné */}
+      <section className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+          <span className="text-sm font-medium text-blue-800">
+            {selectedProject
+              ? `Vous travaillez actuellement sur le projet : ${selectedProject.name}`
+              : "Aucun projet sélectionné"}
+          </span>
         </div>
-      )}
+        {selectedProject && selectedProject.description && (
+          <p className="text-sm text-blue-600 mt-2 ml-5">
+            {selectedProject.description}
+          </p>
+        )}
+      </section>
+      <section>
+        <ProjectNav />
+        <div>
+          <ProjectSelected />
+        </div>
+      </section>
     </main>
   );
 }

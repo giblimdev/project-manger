@@ -1,9 +1,10 @@
 // app/api/projects/route.ts
+
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { getServerSession } from "@/lib/auth/auth-server";
-import { Status } from "@/lib/generated/prisma/client"; // <-- Importe l'enum Prisma généré
+import { Status } from "@/lib/generated/prisma/client";
 
 // --- Schémas de validation Zod ---
 const statusEnum = z.enum([
@@ -25,33 +26,34 @@ const projectCreateSchema = z.object({
   image: z.string().url().optional(),
   status: statusEnum.default("TODO"),
   priority: z.number().int().min(1).default(1),
-  startDate: z.string().datetime().optional(),
-  endDate: z.string().datetime().optional(),
+  // On accepte une date (YYYY-MM-DD) ou rien
+  startDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .optional(),
+  endDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .optional(),
   teamIds: z.array(z.string().uuid()).optional(),
 });
 
 /**
- * GET: Liste des projets avec filtres optionnels
- *
- * Paramètres de requête:
- * - status: Status du projet (optionnel)
- * - priority: Priorité du projet (optionnel)
+ * GET: Liste des projets de l'utilisateur (avec filtres facultatifs)
  */
 export async function GET(req: NextRequest) {
   try {
-    // 1. Vérifier l'authentification
+    // 1. Authentification
     const session = await getServerSession(req);
     if (!session?.userId) {
       return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
     }
 
-    // 2. Récupérer et valider les paramètres de requête
+    // 2. Paramètres de recherche
     const { searchParams } = new URL(req.url);
     const rawParams = {
       status: searchParams.get("status") || undefined,
-      priority: searchParams.get("priority")
-        ? Number(searchParams.get("priority"))
-        : undefined,
+      priority: searchParams.get("priority"),
     };
 
     const parseResult = projectQuerySchema.safeParse(rawParams);
@@ -62,10 +64,9 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // 3. Utiliser la valeur validée (avec le bon type enum)
     const { status, priority } = parseResult.data;
 
-    // 4. Construire la requête Prisma avec les filtres
+    // 3. Filtre Prisma
     const where = {
       users: {
         some: {
@@ -76,7 +77,7 @@ export async function GET(req: NextRequest) {
       ...(priority ? { priority } : {}),
     };
 
-    // 5. Récupérer les projets
+    // 4. Récupérer les projets
     const projects = await prisma.projects.findMany({
       where,
       orderBy: [{ priority: "desc" }, { updatedAt: "desc" }],
@@ -108,15 +109,18 @@ export async function GET(req: NextRequest) {
   }
 }
 
+/**
+ * POST: Création d'un projet
+ */
 export async function POST(req: NextRequest) {
   try {
-    // 1. Vérifier l'authentification
+    // 1. Authentification
     const session = await getServerSession(req);
     if (!session?.userId) {
       return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
     }
 
-    // 2. Récupérer et valider le corps de la requête
+    // 2. Validation du body
     const body = await req.json();
     const parseResult = projectCreateSchema.safeParse(body);
 
@@ -130,10 +134,15 @@ export async function POST(req: NextRequest) {
     const data = parseResult.data;
     const { teamIds, ...projectData } = data;
 
-    // 3. Créer le projet avec les relations
+    // 3. Création du projet
     const project = await prisma.projects.create({
       data: {
         ...projectData,
+        // Prisma attend des dates ou null
+        startDate: projectData.startDate
+          ? new Date(projectData.startDate)
+          : null,
+        endDate: projectData.endDate ? new Date(projectData.endDate) : null,
         creatorId: session.userId,
         users: {
           connect: { id: session.userId },
@@ -158,7 +167,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // 4. Créer un log d'activité
+    // 4. Log d'activité
     await prisma.activityLogs.create({
       data: {
         type: "CREATE",

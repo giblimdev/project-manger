@@ -74,6 +74,12 @@ const commandes = {
         "En se basant sur les fonctionnalités actuelles et les objectifs futurs, propose une liste de prochaines étapes pour le développement du projet.",
       order: 2,
     },
+    {
+      name: "Next steps",
+      prompt:
+        "•	Je veux mettre en place un système de pagination. Dans mes routes et dans mes cpmposant qui affiche les list. •	Cree un composant qui affiche le chemin de faire (path) de la page. •	React react big calender c’est quoi. • Insérer un système de RBAC_MATRIX. •	Créer une composant ou un utils pour afficher sous forme de liste ou de grille dans les composants list. • Créer un système de gestion de l’ordre dans l’affichage des liste",
+      order: 3,
+    },
   ],
 };
 

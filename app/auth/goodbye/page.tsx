@@ -5,7 +5,7 @@ import React, { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { RocketIcon } from "lucide-react";
-import { useUserStore } from "@/stores/useUSerStore";
+import { useUserStore } from "@/stores/useUserStore";
 
 // Composant qui utilise useSearchParams
 function GoodbyeContent() {
