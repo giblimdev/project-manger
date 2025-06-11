@@ -38,7 +38,7 @@ export default function NavigationButtons() {
 
     {
       title: "Blog",
-      link: "/Comments",
+      link: "/comments",
       icon: ScrollText,
     },
   ];

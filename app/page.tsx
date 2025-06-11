@@ -143,7 +143,6 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <h1 className="text-xl text-green-300">app/page</h1>
       {/* Hero Section */}
       <section className="py-20 px-4">
         <UserStoreDisplay />

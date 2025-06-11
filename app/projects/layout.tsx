@@ -16,7 +16,6 @@ export default function RootLayout({
 }) {
   return (
     <div>
-      <h1 className="text-xl text-green-300">app/projects/layout</h1>
       <div className="flex">
         <nav className="">
           <ProjectNav />

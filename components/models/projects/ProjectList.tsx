@@ -157,12 +157,12 @@ export function ProjectList({
       // ✅ CORRECTION : Nettoyage des données selon votre route API
       const cleanedData = {
         name: data.name?.trim() || "",
-        description: data.description?.trim() || undefined, // undefined pour route API
-        image: data.image?.trim() || undefined, // undefined pour route API
+        description: data.description?.trim() || undefined,
+        image: data.image?.trim() || undefined,
         status: data.status || "TODO",
         priority: Number(data.priority) || 1,
-        startDate: data.startDate || undefined, // Format YYYY-MM-DD ou undefined
-        endDate: data.endDate || undefined, // Format YYYY-MM-DD ou undefined
+        startDate: data.startDate || undefined,
+        endDate: data.endDate || undefined,
         teamIds: Array.isArray(data.teamIds) ? data.teamIds : [],
       };
 
@@ -358,7 +358,6 @@ export function ProjectList({
                   className="w-full h-48 object-cover"
                 />
               )}
-
               <div className="p-6">
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-lg font-semibold text-gray-900 truncate flex-1">

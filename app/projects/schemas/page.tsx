@@ -19,7 +19,7 @@ export default function SchemasPage() {
     if (!hasHydrated) return;
 
     async function fetchSchemas() {
-      if (!projectId) {
+      if (!projectId) { 
         setSchemas([]);
         setIsLoading(false);
         return;
