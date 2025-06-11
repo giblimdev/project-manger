@@ -34,49 +34,49 @@ const navItems: NavItem[] = [
   {
     ordred: 2,
     title: "Roadmap",
-    link: "/roadmap",
+    link: "/projects/roadmap",
     icon: Map,
   },
   {
     ordred: 3,
     title: "Architecture",
-    link: "/files",
+    link: "/projects/files",
     icon: FileCode,
   },
   {
     ordred: 4,
     title: "Schéma",
-    link: "/schemas",
+    link: "/projects/schemas",
     icon: Database,
   },
   {
     ordred: 5,
     title: "Features",
-    link: "/features",
+    link: "/projects/features",
     icon: Layers,
   },
   {
     ordred: 6,
     title: "User Stories",
-    link: "/user-stories",
+    link: "/projects/user-stories",
     icon: BookOpen,
   },
   {
     ordred: 7,
     title: "Sprints",
-    link: "/sprints",
+    link: "/projects/sprints",
     icon: Timer,
   },
   {
     ordred: 8,
     title: "Tasks",
-    link: "/tasks",
+    link: "/projects/tasks",
     icon: CheckSquare,
   },
   {
     ordred: 9,
     title: "Teams",
-    link: "/teams",
+    link: "/projects/teams",
     icon: Users,
   },
 ];
@@ -88,29 +88,27 @@ function ProjectNav() {
   const sortedNavItems = navItems.sort((a, b) => a.ordred - b.ordred);
 
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-200 my-3">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center space-x-1 overflow-x-auto py-2">
-          {sortedNavItems.map((item) => {
-            const IconComponent = item.icon;
-            const isActive = pathname === item.link;
+    <nav className="bg-white shadow-sm rounded-xl border-gray-200 mt-10 ml-4">
+      <div className="items-center space-x-1 overflow-x-auto p-2">
+        {sortedNavItems.map((item) => {
+          const IconComponent = item.icon;
+          const isActive = pathname === item.link;
 
-            return (
-              <Link
-                key={item.ordred}
-                href={item.link}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
-                  isActive
-                    ? "bg-blue-100 text-blue-700 border border-blue-200"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                }`}
-              >
-                <IconComponent size={16} />
-                {item.title}
-              </Link>
-            );
-          })}
-        </div>
+          return (
+            <Link
+              key={item.ordred}
+              href={item.link}
+              className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
+                isActive
+                  ? "bg-blue-100 text-blue-700 border border-blue-200"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+              }`}
+            >
+              <IconComponent size={16} />
+              {item.title}
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );

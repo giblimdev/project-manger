@@ -2,7 +2,7 @@
 import React from "react";
 import { Projects, Status } from "@/lib/generated/prisma/client";
 
-// Optionnel : label de statut pour affichage humain
+// Optionnel : label de statut
 const statusLabel: Record<Status, string> = {
   TODO: "À faire",
   IN_PROGRESS: "En cours",
@@ -35,6 +35,9 @@ export function ProjectCard({ project, onClick, selected }: ProjectCardProps) {
           className="w-full h-32 object-cover rounded mb-2"
         />
       )}
+      <h1 className="text-xl text-green-300">
+        components/models/projects/ProjectCard
+      </h1>
       <h2 className="text-lg font-bold mb-1">{project.name}</h2>
       <p className="text-sm text-gray-600 mb-2 line-clamp-2">
         {project.description}

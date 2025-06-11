@@ -26,38 +26,19 @@ export default function NavigationButtons() {
 
   const navigationItems: NavigationItem[] = [
     {
-      title: "Gestion de projet",
+      title: "ProjectManager",
       link: "/projects",
       icon: FolderKanban,
     },
     {
-      title: "Mon organisation",
+      title: "\u00A0Organisation",
       link: "/user/teams",
       icon: Users,
     },
+
     {
-      title: "Features",
-      link: "/dev/features",
-      icon: Code2,
-    },
-    {
-      title: "Road Map",
-      link: "/dev/roadmap",
-      icon: Route,
-    },
-    {
-      title: "Schema",
-      link: "/dev/schema",
-      icon: Database,
-    },
-    {
-      title: "Liens",
-      link: "/dev/link",
-      icon: LinkIcon,
-    },
-    {
-      title: "Promptes",
-      link: "/dev/promptes",
+      title: "Blog",
+      link: "/Comments",
       icon: ScrollText,
     },
   ];

@@ -9,7 +9,6 @@ import { ProjectFilters } from "@/components/models/projects/ProjectFilters";
 import { Button } from "@/components/ui/button";
 import { LayoutGrid, List as ListIcon } from "lucide-react";
 import { useProjectsStore } from "@/stores/useProjectStore";
-import ProjectNav from "@/components/models/projects/ProjectNav";
 import { ProjectSelected } from "@/components/ProjectSelected";
 
 // Fetcher pour SWR
@@ -53,6 +52,8 @@ export default function ProjectsPage() {
 
   return (
     <main className="container py-8">
+      <h1 className="text-xl text-green-300">app/projects</h1>
+
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <h1 className="text-2xl font-bold">Mes projets</h1>
         <div className="flex gap-2">
@@ -96,24 +97,7 @@ export default function ProjectsPage() {
         />
       )}
 
-      {/* Section affichant le projet actuellement sélectionné */}
-      <section className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-          <span className="text-sm font-medium text-blue-800">
-            {selectedProject
-              ? `Vous travaillez actuellement sur le projet : ${selectedProject.name}`
-              : "Aucun projet sélectionné"}
-          </span>
-        </div>
-        {selectedProject && selectedProject.description && (
-          <p className="text-sm text-blue-600 mt-2 ml-5">
-            {selectedProject.description}
-          </p>
-        )}
-      </section>
       <section>
-        <ProjectNav />
         <div>
           <ProjectSelected />
         </div>

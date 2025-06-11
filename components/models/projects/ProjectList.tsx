@@ -223,8 +223,8 @@ export function ProjectList({
   };
 
   return (
-    <div className="space-y-6">
-      {/* Liste */}
+    <div className="space-y-6 p-3">
+      <h1 className="text-xl text-green-300">app/projects</h1>
       {safeProjects.length === 0 ? (
         <div className="text-center py-12">
           <div className="text-gray-400 text-6xl mb-4">📋</div>

@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import { useProjectsStore } from "@/stores/useProjectStore";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardTitle, CardContent } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
@@ -32,14 +32,14 @@ const statusLabels = {
   CANCELLED: "Annulé",
 } as const;
 
-// Couleurs de statut
+// Couleurs de statut modernisées
 const statusColors = {
-  TODO: "bg-gray-100 text-gray-800",
-  IN_PROGRESS: "bg-blue-100 text-blue-800",
-  REVIEW: "bg-yellow-100 text-yellow-800",
-  DONE: "bg-green-100 text-green-800",
-  BLOCKED: "bg-red-100 text-red-800",
-  CANCELLED: "bg-gray-100 text-gray-500",
+  TODO: "bg-neutral-100 text-neutral-700 border border-neutral-200",
+  IN_PROGRESS: "bg-blue-50 text-blue-700 border border-blue-200",
+  REVIEW: "bg-yellow-50 text-yellow-700 border border-yellow-200",
+  DONE: "bg-green-50 text-green-700 border border-green-200",
+  BLOCKED: "bg-red-50 text-red-700 border border-red-200",
+  CANCELLED: "bg-neutral-100 text-neutral-400 border border-neutral-200",
 } as const;
 
 type ProjectSelectedProps = {
@@ -51,14 +51,10 @@ export function ProjectSelected({
   className = "",
   defaultExpanded = ["general"],
 }: ProjectSelectedProps) {
-  // Lecture seule du store
   const { project } = useProjectsStore();
-
-  // État pour contrôler l'accordion
   const [expandedSections, setExpandedSections] =
     useState<string[]>(defaultExpanded);
 
-  // Formatage des dates
   const formatDate = (date: Date | string | null | undefined) => {
     if (!date) return "Non définie";
     return new Date(date).toLocaleDateString("fr-FR", {
@@ -69,34 +65,37 @@ export function ProjectSelected({
   };
 
   return (
-    <Card className={className}>
-      <CardContent className="p-6">
-        <div className="space-y-4">
-          {/* Header du projet */}
-          <div className="flex items-start justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <FolderOpen size={24} className="text-blue-600" />
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900">
-                  {project?.name || "Aucun projet"}
-                </h2>
-                <p className="text-sm text-gray-500">
-                  ID: {project?.id || "Non défini"}
-                </p>
-              </div>
-            </div>
-            <Badge
-              className={
-                project
-                  ? statusColors[project.status]
-                  : "bg-gray-100 text-gray-800"
-              }
-            >
-              {project ? statusLabels[project.status] : "Aucun statut"}
-            </Badge>
-          </div>
+    <div className="max-w-3xl mx-auto py-8">
+      {/* Nom du fichier */}
 
-          {/* Accordion avec les sections du projet */}
+      <Card className={className + " rounded-2xl shadow-lg border-0"}>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 bg-blue-300 p-6 rounded-t-2xl">
+          <div className="flex items-center gap-4">
+            <FolderOpen size={28} className="text-blue-500" />
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+                {project?.name || "Aucun projet"}
+              </h2>
+              <p className="text-sm text-gray-500 ml-6">
+                {project?.description}
+              </p>
+            </div>
+          </div>
+          <Badge
+            className={
+              "px-4 py-2 rounded-full font-semibold text-xs transition " +
+              (project && project.status
+                ? statusColors[project.status]
+                : "bg-neutral-100 text-neutral-700 border border-neutral-200")
+            }
+          >
+            {project && project.status
+              ? statusLabels[project.status]
+              : "Aucun statut"}
+          </Badge>
+        </div>
+
+        <CardContent className="p-8">
           <Accordion
             type="multiple"
             value={expandedSections}
@@ -105,23 +104,20 @@ export function ProjectSelected({
           >
             {/* Section Informations générales */}
             <AccordionItem value="general">
-              <AccordionTrigger className="flex items-center gap-2">
-                <Info size={16} />
+              <AccordionTrigger className="flex items-center gap-2 text-base font-semibold text-gray-800 hover:text-blue-700 transition">
+                <Info size={18} />
                 Informations générales
               </AccordionTrigger>
               <AccordionContent>
-                <div className="space-y-4">
-                  {/* Description */}
+                <div className="space-y-5 pt-2">
                   <div>
-                    <h4 className="text-sm font-medium text-gray-700 mb-2">
+                    <h4 className="text-sm font-medium text-gray-700 mb-1">
                       Description
                     </h4>
-                    <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
+                    <p className="text-sm text-gray-600 bg-neutral-50 p-3 rounded-lg border">
                       {project?.description || "Aucune description"}
                     </p>
                   </div>
-
-                  {/* Métadonnées de base */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex items-center gap-2 text-sm">
                       <Flag size={16} className="text-gray-400" />
@@ -130,7 +126,6 @@ export function ProjectSelected({
                         {project?.priority || "Non définie"}
                       </span>
                     </div>
-
                     <div className="flex items-center gap-2 text-sm">
                       <Calendar size={16} className="text-gray-400" />
                       <span className="text-gray-600">Créé le:</span>
@@ -138,7 +133,6 @@ export function ProjectSelected({
                         {formatDate(project?.createdAt)}
                       </span>
                     </div>
-
                     <div className="flex items-center gap-2 text-sm">
                       <User size={16} className="text-gray-400" />
                       <span className="text-gray-600">Créateur:</span>
@@ -153,12 +147,12 @@ export function ProjectSelected({
 
             {/* Section Planification */}
             <AccordionItem value="planning">
-              <AccordionTrigger className="flex items-center gap-2">
-                <Clock size={16} />
+              <AccordionTrigger className="flex items-center gap-2 text-base font-semibold text-gray-800 hover:text-blue-700 transition">
+                <Clock size={18} />
                 Planification
               </AccordionTrigger>
               <AccordionContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                   <div className="flex items-center gap-2 text-sm">
                     <Clock size={16} className="text-green-500" />
                     <span className="text-gray-600">Date de début:</span>
@@ -166,7 +160,6 @@ export function ProjectSelected({
                       {formatDate(project?.startDate)}
                     </span>
                   </div>
-
                   <div className="flex items-center gap-2 text-sm">
                     <Clock size={16} className="text-red-500" />
                     <span className="text-gray-600">Date de fin:</span>
@@ -175,11 +168,9 @@ export function ProjectSelected({
                     </span>
                   </div>
                 </div>
-
-                {/* Calcul de la durée */}
-                <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                <div className="mt-4 p-3 bg-blue-50 rounded-lg border">
                   <p className="text-sm text-blue-800">
-                    <strong>Durée estimée:</strong>{" "}
+                    <strong>Durée estimée :</strong>{" "}
                     {project?.startDate && project?.endDate
                       ? Math.ceil(
                           (new Date(project.endDate).getTime() -
@@ -194,24 +185,24 @@ export function ProjectSelected({
 
             {/* Section Médias */}
             <AccordionItem value="media">
-              <AccordionTrigger className="flex items-center gap-2">
-                <ImageIcon size={16} />
+              <AccordionTrigger className="flex items-center gap-2 text-base font-semibold text-gray-800 hover:text-blue-700 transition">
+                <ImageIcon size={18} />
                 Médias
               </AccordionTrigger>
               <AccordionContent>
-                <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-3">
+                <div className="pt-2">
+                  <h4 className="text-sm font-medium text-gray-700 mb-2">
                     Image du projet
                   </h4>
                   {project?.image ? (
                     <img
                       src={project.image}
                       alt={project.name}
-                      className="w-full max-w-md h-48 object-cover rounded-lg border shadow-sm"
+                      className="w-full max-w-md h-48 object-cover rounded-lg border shadow"
                     />
                   ) : (
-                    <div className="w-full max-w-md h-48 bg-gray-100 rounded-lg border flex items-center justify-center">
-                      <span className="text-gray-500">Aucune image</span>
+                    <div className="w-full max-w-md h-48 bg-neutral-100 rounded-lg border flex items-center justify-center">
+                      <span className="text-gray-400">Aucune image</span>
                     </div>
                   )}
                 </div>
@@ -220,20 +211,19 @@ export function ProjectSelected({
 
             {/* Section Métadonnées système */}
             <AccordionItem value="metadata">
-              <AccordionTrigger className="flex items-center gap-2">
-                <Settings size={16} />
+              <AccordionTrigger className="flex items-center gap-2 text-base font-semibold text-gray-800 hover:text-blue-700 transition">
+                <Settings size={18} />
                 Métadonnées système
               </AccordionTrigger>
               <AccordionContent>
-                <div className="space-y-3">
+                <div className="space-y-3 pt-2">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div>
                       <span className="text-gray-600">ID du projet:</span>
-                      <p className="font-mono text-xs bg-gray-100 p-2 rounded mt-1">
+                      <p className="font-mono text-xs bg-neutral-50 p-2 rounded mt-1 border">
                         {project?.id || "Aucun ID"}
                       </p>
                     </div>
-
                     <div>
                       <span className="text-gray-600">
                         Dernière mise à jour:
@@ -242,10 +232,9 @@ export function ProjectSelected({
                         {formatDate(project?.updatedAt)}
                       </p>
                     </div>
-
                     <div>
                       <span className="text-gray-600">ID du créateur:</span>
-                      <p className="font-mono text-xs bg-gray-100 p-2 rounded mt-1">
+                      <p className="font-mono text-xs bg-neutral-50 p-2 rounded mt-1 border">
                         {project?.creatorId || "Aucun créateur"}
                       </p>
                     </div>
@@ -254,8 +243,8 @@ export function ProjectSelected({
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

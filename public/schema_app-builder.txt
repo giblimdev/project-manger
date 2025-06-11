@@ -190,8 +190,8 @@ model Projects {
   comments     Comments[]
   schemaFields SchemaFields[]
   roadMaps     RoadMap[]
-  tasks        Tasks[] // ← NOUVELLE RELATION DIRECTE
-  timeLogs     TimeLog[] // ← NOUVELLE RELATION DIRECTE
+  tasks        Tasks[]
+  timeLogs     TimeLog[]
 
   @@index([name])
   @@index([status])
@@ -221,10 +221,8 @@ model RoadMap {
   creator User?    @relation("RoadMapCreator", fields: [creatorId], references: [id], onDelete: SetNull)
 
   // Relations optionnelles avec autres entités
-  comments Comments[]
-  files    Files[]
-
-  // NOUVELLES RELATIONS OPTIONNELLES
+  comments    Comments[]
+  files       Files[]
   features    Features[]  @relation("RoadMapFeatures")
   userStories UserStory[] @relation("RoadMapUserStories")
   sprints     Sprints[]   @relation("RoadMapSprints")
@@ -239,7 +237,7 @@ model RoadMap {
 model Features {
   id              String    @id @default(uuid())
   name            String
-  ordrer          Int       @default(100)
+  order           Int       @default(100)
   description     String?
   status          Status    @default(TODO)
   priority        Int       @default(1)
@@ -256,17 +254,13 @@ model Features {
   creator User?    @relation("FeatureCreator", fields: [creatorId], references: [id], onDelete: SetNull)
 
   // Auto-référence hiérarchique
-  parentFeature Features?  @relation("FeatureHierarchy", fields: [parentFeatureId], references: [id], onDelete: SetNull)
-  childFeatures Features[] @relation("FeatureHierarchy")
-
-  // Relations optionnelles avec autres entités
-  comments Comments[]
-
-  // NOUVELLES RELATIONS OPTIONNELLES
-  roadMaps    RoadMap[]   @relation("RoadMapFeatures")
-  userStories UserStory[] @relation("FeatureUserStories")
-  sprints     Sprints[]   @relation("FeatureSprints")
-  tasks       Tasks[]     @relation("FeatureTasks")
+  parentFeature Features?   @relation("FeatureHierarchy", fields: [parentFeatureId], references: [id], onDelete: SetNull)
+  childFeatures Features[]  @relation("FeatureHierarchy")
+  comments      Comments[]
+  roadMaps      RoadMap[]   @relation("RoadMapFeatures")
+  userStories   UserStory[] @relation("FeatureUserStories")
+  sprints       Sprints[]   @relation("FeatureSprints")
+  tasks         Tasks[]     @relation("FeatureTasks")
 
   @@index([projectId])
   @@map("features")
@@ -295,15 +289,11 @@ model UserStory {
   // Auto-référence hiérarchique
   parentUserStory  UserStory?  @relation("UserStoryHierarchy", fields: [parentUserStoryId], references: [id], onDelete: SetNull)
   childUserStories UserStory[] @relation("UserStoryHierarchy")
-
-  // Relations optionnelles avec autres entités
-  comments Comments[]
-
-  // NOUVELLES RELATIONS OPTIONNELLES
-  roadMaps RoadMap[]  @relation("RoadMapUserStories")
-  features Features[] @relation("FeatureUserStories")
-  sprints  Sprints[]  @relation("SprintUserStories")
-  tasks    Tasks[]    @relation("UserStoryTasks")
+  comments         Comments[]
+  roadMaps         RoadMap[]   @relation("RoadMapUserStories")
+  features         Features[]  @relation("FeatureUserStories")
+  sprints          Sprints[]   @relation("SprintUserStories")
+  tasks            Tasks[]     @relation("UserStoryTasks")
 
   @@index([projectId])
   @@map("user_stories")
@@ -326,9 +316,7 @@ model Sprints {
   creator User?    @relation("SprintCreator", fields: [creatorId], references: [id], onDelete: SetNull)
 
   // Relations optionnelles avec autres entités
-  comments Comments[]
-
-  // NOUVELLES RELATIONS OPTIONNELLES
+  comments    Comments[]
   roadMaps    RoadMap[]   @relation("RoadMapSprints")
   features    Features[]  @relation("FeatureSprints")
   userStories UserStory[] @relation("SprintUserStories")
@@ -360,10 +348,8 @@ model Tasks {
   childTasks Tasks[] @relation("TaskHierarchy")
 
   // Relations directes
-  timeLogs TimeLog[]
-  comments Comments[]
-
-  // NOUVELLES RELATIONS OPTIONNELLES (many-to-many)
+  timeLogs    TimeLog[]
+  comments    Comments[]
   roadMaps    RoadMap[]   @relation("RoadMapTasks")
   features    Features[]  @relation("FeatureTasks")
   userStories UserStory[] @relation("UserStoryTasks")
@@ -456,6 +442,7 @@ model Files {
   name             String
   extension        String?
   url              String
+  category         String   @default("dossier")
   type             FileType
   description      String?
   fonctionnalities String?
@@ -496,4 +483,9 @@ model ActivityLogs {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("activity_logs")
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "erd.svg"
 }

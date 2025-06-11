@@ -20,11 +20,11 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className="min-h-screen">
+        <h1 className="text-xl text-green-300">app/layout</h1>
         <AnimatedBackground />
-
         <Header />
         <div className="flex flex-col min-h-screen">
-          <main className="flex-1 container mx-auto px-4 py-6">{children}</main>
+          <main className="flex-1">{children}</main>
         </div>
         <Toaster richColors />
         <Footer />

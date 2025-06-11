@@ -48,6 +48,7 @@ export default function ProjectsPage() {
 
   return (
     <main className="container py-8">
+      <h1 className="text-xl text-green-300">app/projects/[projectId]</h1>
       {/* Header avec titre et boutons de vue */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <h1 className="text-2xl font-bold">Mes projets</h1>

@@ -62,11 +62,9 @@ enum FieldType {
   DATETIME
   FLOAT
   JSON
-  TEXT
-  UUID
 }
 
-// Models de base (inchangés)
+// Models authentification
 model User {
   id            String   @id @default(uuid())
   name          String?
@@ -170,6 +168,7 @@ model Teams {
 model Projects {
   id          String    @id @default(uuid())
   name        String
+  ordre       Int       @default(10)
   description String?
   image       String?
   status      Status    @default(TODO)
@@ -237,7 +236,7 @@ model RoadMap {
 model Features {
   id              String    @id @default(uuid())
   name            String
-  ordrer          Int       @default(100)
+  order           Int       @default(100)
   description     String?
   status          Status    @default(TODO)
   priority        Int       @default(1)
@@ -245,7 +244,7 @@ model Features {
   endDate         DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
-  projectId       String // ← DÉPENDANCE PRINCIPALE
+  projectId       String
   creatorId       String?
   parentFeatureId String?
 
@@ -442,6 +441,7 @@ model Files {
   name             String
   extension        String?
   url              String
+  category         String   @default("dossier")
   type             FileType
   description      String?
   fonctionnalities String?

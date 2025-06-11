@@ -165,9 +165,7 @@ export const FieldType: {
   DATE: 'DATE',
   DATETIME: 'DATETIME',
   FLOAT: 'FLOAT',
-  JSON: 'JSON',
-  TEXT: 'TEXT',
-  UUID: 'UUID'
+  JSON: 'JSON'
 };
 
 export type FieldType = (typeof FieldType)[keyof typeof FieldType]
@@ -9221,16 +9219,19 @@ export namespace Prisma {
   }
 
   export type ProjectsAvgAggregateOutputType = {
+    ordre: number | null
     priority: number | null
   }
 
   export type ProjectsSumAggregateOutputType = {
+    ordre: number | null
     priority: number | null
   }
 
   export type ProjectsMinAggregateOutputType = {
     id: string | null
     name: string | null
+    ordre: number | null
     description: string | null
     image: string | null
     status: $Enums.Status | null
@@ -9245,6 +9246,7 @@ export namespace Prisma {
   export type ProjectsMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    ordre: number | null
     description: string | null
     image: string | null
     status: $Enums.Status | null
@@ -9259,6 +9261,7 @@ export namespace Prisma {
   export type ProjectsCountAggregateOutputType = {
     id: number
     name: number
+    ordre: number
     description: number
     image: number
     status: number
@@ -9273,16 +9276,19 @@ export namespace Prisma {
 
 
   export type ProjectsAvgAggregateInputType = {
+    ordre?: true
     priority?: true
   }
 
   export type ProjectsSumAggregateInputType = {
+    ordre?: true
     priority?: true
   }
 
   export type ProjectsMinAggregateInputType = {
     id?: true
     name?: true
+    ordre?: true
     description?: true
     image?: true
     status?: true
@@ -9297,6 +9303,7 @@ export namespace Prisma {
   export type ProjectsMaxAggregateInputType = {
     id?: true
     name?: true
+    ordre?: true
     description?: true
     image?: true
     status?: true
@@ -9311,6 +9318,7 @@ export namespace Prisma {
   export type ProjectsCountAggregateInputType = {
     id?: true
     name?: true
+    ordre?: true
     description?: true
     image?: true
     status?: true
@@ -9412,6 +9420,7 @@ export namespace Prisma {
   export type ProjectsGroupByOutputType = {
     id: string
     name: string
+    ordre: number
     description: string | null
     image: string | null
     status: $Enums.Status
@@ -9445,6 +9454,7 @@ export namespace Prisma {
   export type ProjectsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    ordre?: boolean
     description?: boolean
     image?: boolean
     status?: boolean
@@ -9472,6 +9482,7 @@ export namespace Prisma {
   export type ProjectsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    ordre?: boolean
     description?: boolean
     image?: boolean
     status?: boolean
@@ -9487,6 +9498,7 @@ export namespace Prisma {
   export type ProjectsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    ordre?: boolean
     description?: boolean
     image?: boolean
     status?: boolean
@@ -9502,6 +9514,7 @@ export namespace Prisma {
   export type ProjectsSelectScalar = {
     id?: boolean
     name?: boolean
+    ordre?: boolean
     description?: boolean
     image?: boolean
     status?: boolean
@@ -9513,7 +9526,7 @@ export namespace Prisma {
     creatorId?: boolean
   }
 
-  export type ProjectsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "image" | "status" | "priority" | "startDate" | "endDate" | "createdAt" | "updatedAt" | "creatorId", ExtArgs["result"]["projects"]>
+  export type ProjectsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "ordre" | "description" | "image" | "status" | "priority" | "startDate" | "endDate" | "createdAt" | "updatedAt" | "creatorId", ExtArgs["result"]["projects"]>
   export type ProjectsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | Projects$creatorArgs<ExtArgs>
     users?: boolean | Projects$usersArgs<ExtArgs>
@@ -9555,6 +9568,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      ordre: number
       description: string | null
       image: string | null
       status: $Enums.Status
@@ -10001,6 +10015,7 @@ export namespace Prisma {
   interface ProjectsFieldRefs {
     readonly id: FieldRef<"Projects", 'String'>
     readonly name: FieldRef<"Projects", 'String'>
+    readonly ordre: FieldRef<"Projects", 'Int'>
     readonly description: FieldRef<"Projects", 'String'>
     readonly image: FieldRef<"Projects", 'String'>
     readonly status: FieldRef<"Projects", 'Status'>
@@ -12152,19 +12167,19 @@ export namespace Prisma {
   }
 
   export type FeaturesAvgAggregateOutputType = {
-    ordrer: number | null
+    order: number | null
     priority: number | null
   }
 
   export type FeaturesSumAggregateOutputType = {
-    ordrer: number | null
+    order: number | null
     priority: number | null
   }
 
   export type FeaturesMinAggregateOutputType = {
     id: string | null
     name: string | null
-    ordrer: number | null
+    order: number | null
     description: string | null
     status: $Enums.Status | null
     priority: number | null
@@ -12180,7 +12195,7 @@ export namespace Prisma {
   export type FeaturesMaxAggregateOutputType = {
     id: string | null
     name: string | null
-    ordrer: number | null
+    order: number | null
     description: string | null
     status: $Enums.Status | null
     priority: number | null
@@ -12196,7 +12211,7 @@ export namespace Prisma {
   export type FeaturesCountAggregateOutputType = {
     id: number
     name: number
-    ordrer: number
+    order: number
     description: number
     status: number
     priority: number
@@ -12212,19 +12227,19 @@ export namespace Prisma {
 
 
   export type FeaturesAvgAggregateInputType = {
-    ordrer?: true
+    order?: true
     priority?: true
   }
 
   export type FeaturesSumAggregateInputType = {
-    ordrer?: true
+    order?: true
     priority?: true
   }
 
   export type FeaturesMinAggregateInputType = {
     id?: true
     name?: true
-    ordrer?: true
+    order?: true
     description?: true
     status?: true
     priority?: true
@@ -12240,7 +12255,7 @@ export namespace Prisma {
   export type FeaturesMaxAggregateInputType = {
     id?: true
     name?: true
-    ordrer?: true
+    order?: true
     description?: true
     status?: true
     priority?: true
@@ -12256,7 +12271,7 @@ export namespace Prisma {
   export type FeaturesCountAggregateInputType = {
     id?: true
     name?: true
-    ordrer?: true
+    order?: true
     description?: true
     status?: true
     priority?: true
@@ -12359,7 +12374,7 @@ export namespace Prisma {
   export type FeaturesGroupByOutputType = {
     id: string
     name: string
-    ordrer: number
+    order: number
     description: string | null
     status: $Enums.Status
     priority: number
@@ -12394,7 +12409,7 @@ export namespace Prisma {
   export type FeaturesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    ordrer?: boolean
+    order?: boolean
     description?: boolean
     status?: boolean
     priority?: boolean
@@ -12420,7 +12435,7 @@ export namespace Prisma {
   export type FeaturesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    ordrer?: boolean
+    order?: boolean
     description?: boolean
     status?: boolean
     priority?: boolean
@@ -12439,7 +12454,7 @@ export namespace Prisma {
   export type FeaturesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    ordrer?: boolean
+    order?: boolean
     description?: boolean
     status?: boolean
     priority?: boolean
@@ -12458,7 +12473,7 @@ export namespace Prisma {
   export type FeaturesSelectScalar = {
     id?: boolean
     name?: boolean
-    ordrer?: boolean
+    order?: boolean
     description?: boolean
     status?: boolean
     priority?: boolean
@@ -12471,7 +12486,7 @@ export namespace Prisma {
     parentFeatureId?: boolean
   }
 
-  export type FeaturesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "ordrer" | "description" | "status" | "priority" | "startDate" | "endDate" | "createdAt" | "updatedAt" | "projectId" | "creatorId" | "parentFeatureId", ExtArgs["result"]["features"]>
+  export type FeaturesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "order" | "description" | "status" | "priority" | "startDate" | "endDate" | "createdAt" | "updatedAt" | "projectId" | "creatorId" | "parentFeatureId", ExtArgs["result"]["features"]>
   export type FeaturesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectsDefaultArgs<ExtArgs>
     creator?: boolean | Features$creatorArgs<ExtArgs>
@@ -12511,7 +12526,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      ordrer: number
+      order: number
       description: string | null
       status: $Enums.Status
       priority: number
@@ -12956,7 +12971,7 @@ export namespace Prisma {
   interface FeaturesFieldRefs {
     readonly id: FieldRef<"Features", 'String'>
     readonly name: FieldRef<"Features", 'String'>
-    readonly ordrer: FieldRef<"Features", 'Int'>
+    readonly order: FieldRef<"Features", 'Int'>
     readonly description: FieldRef<"Features", 'String'>
     readonly status: FieldRef<"Features", 'Status'>
     readonly priority: FieldRef<"Features", 'Int'>
@@ -21478,6 +21493,7 @@ export namespace Prisma {
     name: string | null
     extension: string | null
     url: string | null
+    category: string | null
     type: $Enums.FileType | null
     description: string | null
     fonctionnalities: string | null
@@ -21501,6 +21517,7 @@ export namespace Prisma {
     name: string | null
     extension: string | null
     url: string | null
+    category: string | null
     type: $Enums.FileType | null
     description: string | null
     fonctionnalities: string | null
@@ -21524,6 +21541,7 @@ export namespace Prisma {
     name: number
     extension: number
     url: number
+    category: number
     type: number
     description: number
     fonctionnalities: number
@@ -21559,6 +21577,7 @@ export namespace Prisma {
     name?: true
     extension?: true
     url?: true
+    category?: true
     type?: true
     description?: true
     fonctionnalities?: true
@@ -21582,6 +21601,7 @@ export namespace Prisma {
     name?: true
     extension?: true
     url?: true
+    category?: true
     type?: true
     description?: true
     fonctionnalities?: true
@@ -21605,6 +21625,7 @@ export namespace Prisma {
     name?: true
     extension?: true
     url?: true
+    category?: true
     type?: true
     description?: true
     fonctionnalities?: true
@@ -21715,6 +21736,7 @@ export namespace Prisma {
     name: string
     extension: string | null
     url: string
+    category: string
     type: $Enums.FileType
     description: string | null
     fonctionnalities: string | null
@@ -21757,6 +21779,7 @@ export namespace Prisma {
     name?: boolean
     extension?: boolean
     url?: boolean
+    category?: boolean
     type?: boolean
     description?: boolean
     fonctionnalities?: boolean
@@ -21786,6 +21809,7 @@ export namespace Prisma {
     name?: boolean
     extension?: boolean
     url?: boolean
+    category?: boolean
     type?: boolean
     description?: boolean
     fonctionnalities?: boolean
@@ -21812,6 +21836,7 @@ export namespace Prisma {
     name?: boolean
     extension?: boolean
     url?: boolean
+    category?: boolean
     type?: boolean
     description?: boolean
     fonctionnalities?: boolean
@@ -21838,6 +21863,7 @@ export namespace Prisma {
     name?: boolean
     extension?: boolean
     url?: boolean
+    category?: boolean
     type?: boolean
     description?: boolean
     fonctionnalities?: boolean
@@ -21856,7 +21882,7 @@ export namespace Prisma {
     parentFileId?: boolean
   }
 
-  export type FilesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "extension" | "url" | "type" | "description" | "fonctionnalities" | "import" | "export" | "useby" | "script" | "version" | "order" | "devorder" | "status" | "createdAt" | "creator" | "projectId" | "uploaderId" | "parentFileId", ExtArgs["result"]["files"]>
+  export type FilesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "extension" | "url" | "category" | "type" | "description" | "fonctionnalities" | "import" | "export" | "useby" | "script" | "version" | "order" | "devorder" | "status" | "createdAt" | "creator" | "projectId" | "uploaderId" | "parentFileId", ExtArgs["result"]["files"]>
   export type FilesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectsDefaultArgs<ExtArgs>
     uploader?: boolean | UserDefaultArgs<ExtArgs>
@@ -21890,6 +21916,7 @@ export namespace Prisma {
       name: string
       extension: string | null
       url: string
+      category: string
       type: $Enums.FileType
       description: string | null
       fonctionnalities: string | null
@@ -22338,6 +22365,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Files", 'String'>
     readonly extension: FieldRef<"Files", 'String'>
     readonly url: FieldRef<"Files", 'String'>
+    readonly category: FieldRef<"Files", 'String'>
     readonly type: FieldRef<"Files", 'FileType'>
     readonly description: FieldRef<"Files", 'String'>
     readonly fonctionnalities: FieldRef<"Files", 'String'>
@@ -23979,6 +24007,7 @@ export namespace Prisma {
   export const ProjectsScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    ordre: 'ordre',
     description: 'description',
     image: 'image',
     status: 'status',
@@ -24018,7 +24047,7 @@ export namespace Prisma {
   export const FeaturesScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    ordrer: 'ordrer',
+    order: 'order',
     description: 'description',
     status: 'status',
     priority: 'priority',
@@ -24142,6 +24171,7 @@ export namespace Prisma {
     name: 'name',
     extension: 'extension',
     url: 'url',
+    category: 'category',
     type: 'type',
     description: 'description',
     fonctionnalities: 'fonctionnalities',
@@ -24224,16 +24254,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Status'
+   * Reference to a field of type 'Int'
    */
-  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Status'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
     
 
 
@@ -24712,6 +24742,7 @@ export namespace Prisma {
     NOT?: ProjectsWhereInput | ProjectsWhereInput[]
     id?: StringFilter<"Projects"> | string
     name?: StringFilter<"Projects"> | string
+    ordre?: IntFilter<"Projects"> | number
     description?: StringNullableFilter<"Projects"> | string | null
     image?: StringNullableFilter<"Projects"> | string | null
     status?: EnumStatusFilter<"Projects"> | $Enums.Status
@@ -24738,6 +24769,7 @@ export namespace Prisma {
   export type ProjectsOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    ordre?: SortOrder
     description?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     status?: SortOrder
@@ -24767,6 +24799,7 @@ export namespace Prisma {
     OR?: ProjectsWhereInput[]
     NOT?: ProjectsWhereInput | ProjectsWhereInput[]
     name?: StringFilter<"Projects"> | string
+    ordre?: IntFilter<"Projects"> | number
     description?: StringNullableFilter<"Projects"> | string | null
     image?: StringNullableFilter<"Projects"> | string | null
     status?: EnumStatusFilter<"Projects"> | $Enums.Status
@@ -24793,6 +24826,7 @@ export namespace Prisma {
   export type ProjectsOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    ordre?: SortOrder
     description?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     status?: SortOrder
@@ -24815,6 +24849,7 @@ export namespace Prisma {
     NOT?: ProjectsScalarWhereWithAggregatesInput | ProjectsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Projects"> | string
     name?: StringWithAggregatesFilter<"Projects"> | string
+    ordre?: IntWithAggregatesFilter<"Projects"> | number
     description?: StringNullableWithAggregatesFilter<"Projects"> | string | null
     image?: StringNullableWithAggregatesFilter<"Projects"> | string | null
     status?: EnumStatusWithAggregatesFilter<"Projects"> | $Enums.Status
@@ -24965,7 +25000,7 @@ export namespace Prisma {
     NOT?: FeaturesWhereInput | FeaturesWhereInput[]
     id?: StringFilter<"Features"> | string
     name?: StringFilter<"Features"> | string
-    ordrer?: IntFilter<"Features"> | number
+    order?: IntFilter<"Features"> | number
     description?: StringNullableFilter<"Features"> | string | null
     status?: EnumStatusFilter<"Features"> | $Enums.Status
     priority?: IntFilter<"Features"> | number
@@ -24990,7 +25025,7 @@ export namespace Prisma {
   export type FeaturesOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    ordrer?: SortOrder
+    order?: SortOrder
     description?: SortOrderInput | SortOrder
     status?: SortOrder
     priority?: SortOrder
@@ -25018,7 +25053,7 @@ export namespace Prisma {
     OR?: FeaturesWhereInput[]
     NOT?: FeaturesWhereInput | FeaturesWhereInput[]
     name?: StringFilter<"Features"> | string
-    ordrer?: IntFilter<"Features"> | number
+    order?: IntFilter<"Features"> | number
     description?: StringNullableFilter<"Features"> | string | null
     status?: EnumStatusFilter<"Features"> | $Enums.Status
     priority?: IntFilter<"Features"> | number
@@ -25043,7 +25078,7 @@ export namespace Prisma {
   export type FeaturesOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    ordrer?: SortOrder
+    order?: SortOrder
     description?: SortOrderInput | SortOrder
     status?: SortOrder
     priority?: SortOrder
@@ -25067,7 +25102,7 @@ export namespace Prisma {
     NOT?: FeaturesScalarWhereWithAggregatesInput | FeaturesScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Features"> | string
     name?: StringWithAggregatesFilter<"Features"> | string
-    ordrer?: IntWithAggregatesFilter<"Features"> | number
+    order?: IntWithAggregatesFilter<"Features"> | number
     description?: StringNullableWithAggregatesFilter<"Features"> | string | null
     status?: EnumStatusWithAggregatesFilter<"Features"> | $Enums.Status
     priority?: IntWithAggregatesFilter<"Features"> | number
@@ -25716,6 +25751,7 @@ export namespace Prisma {
     name?: StringFilter<"Files"> | string
     extension?: StringNullableFilter<"Files"> | string | null
     url?: StringFilter<"Files"> | string
+    category?: StringFilter<"Files"> | string
     type?: EnumFileTypeFilter<"Files"> | $Enums.FileType
     description?: StringNullableFilter<"Files"> | string | null
     fonctionnalities?: StringNullableFilter<"Files"> | string | null
@@ -25744,6 +25780,7 @@ export namespace Prisma {
     name?: SortOrder
     extension?: SortOrderInput | SortOrder
     url?: SortOrder
+    category?: SortOrder
     type?: SortOrder
     description?: SortOrderInput | SortOrder
     fonctionnalities?: SortOrderInput | SortOrder
@@ -25775,6 +25812,7 @@ export namespace Prisma {
     name?: StringFilter<"Files"> | string
     extension?: StringNullableFilter<"Files"> | string | null
     url?: StringFilter<"Files"> | string
+    category?: StringFilter<"Files"> | string
     type?: EnumFileTypeFilter<"Files"> | $Enums.FileType
     description?: StringNullableFilter<"Files"> | string | null
     fonctionnalities?: StringNullableFilter<"Files"> | string | null
@@ -25803,6 +25841,7 @@ export namespace Prisma {
     name?: SortOrder
     extension?: SortOrderInput | SortOrder
     url?: SortOrder
+    category?: SortOrder
     type?: SortOrder
     description?: SortOrderInput | SortOrder
     fonctionnalities?: SortOrderInput | SortOrder
@@ -25834,6 +25873,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Files"> | string
     extension?: StringNullableWithAggregatesFilter<"Files"> | string | null
     url?: StringWithAggregatesFilter<"Files"> | string
+    category?: StringWithAggregatesFilter<"Files"> | string
     type?: EnumFileTypeWithAggregatesFilter<"Files"> | $Enums.FileType
     description?: StringNullableWithAggregatesFilter<"Files"> | string | null
     fonctionnalities?: StringNullableWithAggregatesFilter<"Files"> | string | null
@@ -26405,6 +26445,7 @@ export namespace Prisma {
   export type ProjectsCreateInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -26430,6 +26471,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -26455,6 +26497,7 @@ export namespace Prisma {
   export type ProjectsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -26480,6 +26523,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -26505,6 +26549,7 @@ export namespace Prisma {
   export type ProjectsCreateManyInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -26519,6 +26564,7 @@ export namespace Prisma {
   export type ProjectsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -26532,6 +26578,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -26701,7 +26748,7 @@ export namespace Prisma {
   export type FeaturesCreateInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -26723,7 +26770,7 @@ export namespace Prisma {
   export type FeaturesUncheckedCreateInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -26745,7 +26792,7 @@ export namespace Prisma {
   export type FeaturesUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -26767,7 +26814,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -26789,7 +26836,7 @@ export namespace Prisma {
   export type FeaturesCreateManyInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -26805,7 +26852,7 @@ export namespace Prisma {
   export type FeaturesUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -26818,7 +26865,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -27490,6 +27537,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -27515,6 +27563,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -27540,6 +27589,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27565,6 +27615,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27590,6 +27641,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -27613,6 +27665,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27633,6 +27686,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28196,13 +28250,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type EnumStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[]
-    notIn?: $Enums.Status[]
-    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -28212,6 +28259,13 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type EnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
   export type SchemaFieldsListRelationFilter = {
@@ -28227,6 +28281,7 @@ export namespace Prisma {
   export type ProjectsCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    ordre?: SortOrder
     description?: SortOrder
     image?: SortOrder
     status?: SortOrder
@@ -28239,12 +28294,14 @@ export namespace Prisma {
   }
 
   export type ProjectsAvgOrderByAggregateInput = {
+    ordre?: SortOrder
     priority?: SortOrder
   }
 
   export type ProjectsMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    ordre?: SortOrder
     description?: SortOrder
     image?: SortOrder
     status?: SortOrder
@@ -28259,6 +28316,7 @@ export namespace Prisma {
   export type ProjectsMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    ordre?: SortOrder
     description?: SortOrder
     image?: SortOrder
     status?: SortOrder
@@ -28271,17 +28329,8 @@ export namespace Prisma {
   }
 
   export type ProjectsSumOrderByAggregateInput = {
+    ordre?: SortOrder
     priority?: SortOrder
-  }
-
-  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[]
-    notIn?: $Enums.Status[]
-    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusFilter<$PrismaModel>
-    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -28298,6 +28347,16 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type ProjectsScalarRelationFilter = {
@@ -28380,7 +28439,7 @@ export namespace Prisma {
   export type FeaturesCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    ordrer?: SortOrder
+    order?: SortOrder
     description?: SortOrder
     status?: SortOrder
     priority?: SortOrder
@@ -28394,14 +28453,14 @@ export namespace Prisma {
   }
 
   export type FeaturesAvgOrderByAggregateInput = {
-    ordrer?: SortOrder
+    order?: SortOrder
     priority?: SortOrder
   }
 
   export type FeaturesMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    ordrer?: SortOrder
+    order?: SortOrder
     description?: SortOrder
     status?: SortOrder
     priority?: SortOrder
@@ -28417,7 +28476,7 @@ export namespace Prisma {
   export type FeaturesMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    ordrer?: SortOrder
+    order?: SortOrder
     description?: SortOrder
     status?: SortOrder
     priority?: SortOrder
@@ -28431,7 +28490,7 @@ export namespace Prisma {
   }
 
   export type FeaturesSumOrderByAggregateInput = {
-    ordrer?: SortOrder
+    order?: SortOrder
     priority?: SortOrder
   }
 
@@ -28803,6 +28862,7 @@ export namespace Prisma {
     name?: SortOrder
     extension?: SortOrder
     url?: SortOrder
+    category?: SortOrder
     type?: SortOrder
     description?: SortOrder
     fonctionnalities?: SortOrder
@@ -28831,6 +28891,7 @@ export namespace Prisma {
     name?: SortOrder
     extension?: SortOrder
     url?: SortOrder
+    category?: SortOrder
     type?: SortOrder
     description?: SortOrder
     fonctionnalities?: SortOrder
@@ -28854,6 +28915,7 @@ export namespace Prisma {
     name?: SortOrder
     extension?: SortOrder
     url?: SortOrder
+    category?: SortOrder
     type?: SortOrder
     description?: SortOrder
     fonctionnalities?: SortOrder
@@ -29906,16 +29968,16 @@ export namespace Prisma {
     connect?: TimeLogWhereUniqueInput | TimeLogWhereUniqueInput[]
   }
 
-  export type EnumStatusFieldUpdateOperationsInput = {
-    set?: $Enums.Status
-  }
-
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: $Enums.Status
   }
 
   export type UserUpdateOneWithoutCreatedProjectsNestedInput = {
@@ -32213,16 +32275,6 @@ export namespace Prisma {
     not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
-  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[]
-    notIn?: $Enums.Status[]
-    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusFilter<$PrismaModel>
-    _max?: NestedEnumStatusFilter<$PrismaModel>
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -32248,6 +32300,16 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumSprintStatusFilter<$PrismaModel = never> = {
@@ -32416,6 +32478,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutUsersInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -32440,6 +32503,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutUsersInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -32469,6 +32533,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutCreatorInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -32493,6 +32558,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutCreatorInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -32526,7 +32592,7 @@ export namespace Prisma {
   export type FeaturesCreateWithoutCreatorInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -32547,7 +32613,7 @@ export namespace Prisma {
   export type FeaturesUncheckedCreateWithoutCreatorInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -32770,6 +32836,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -32794,6 +32861,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -33104,6 +33172,7 @@ export namespace Prisma {
     NOT?: ProjectsScalarWhereInput | ProjectsScalarWhereInput[]
     id?: StringFilter<"Projects"> | string
     name?: StringFilter<"Projects"> | string
+    ordre?: IntFilter<"Projects"> | number
     description?: StringNullableFilter<"Projects"> | string | null
     image?: StringNullableFilter<"Projects"> | string | null
     status?: EnumStatusFilter<"Projects"> | $Enums.Status
@@ -33153,7 +33222,7 @@ export namespace Prisma {
     NOT?: FeaturesScalarWhereInput | FeaturesScalarWhereInput[]
     id?: StringFilter<"Features"> | string
     name?: StringFilter<"Features"> | string
-    ordrer?: IntFilter<"Features"> | number
+    order?: IntFilter<"Features"> | number
     description?: StringNullableFilter<"Features"> | string | null
     status?: EnumStatusFilter<"Features"> | $Enums.Status
     priority?: IntFilter<"Features"> | number
@@ -33349,6 +33418,7 @@ export namespace Prisma {
     name?: StringFilter<"Files"> | string
     extension?: StringNullableFilter<"Files"> | string | null
     url?: StringFilter<"Files"> | string
+    category?: StringFilter<"Files"> | string
     type?: EnumFileTypeFilter<"Files"> | $Enums.FileType
     description?: StringNullableFilter<"Files"> | string | null
     fonctionnalities?: StringNullableFilter<"Files"> | string | null
@@ -33977,6 +34047,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutTeamsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -34001,6 +34072,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutTeamsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -34291,7 +34363,7 @@ export namespace Prisma {
   export type FeaturesCreateWithoutProjectInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -34312,7 +34384,7 @@ export namespace Prisma {
   export type FeaturesUncheckedCreateWithoutProjectInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -34440,6 +34512,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -34464,6 +34537,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -34968,6 +35042,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutRoadMapsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -34992,6 +35067,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutRoadMapsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -35123,6 +35199,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -35147,6 +35224,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -35174,7 +35252,7 @@ export namespace Prisma {
   export type FeaturesCreateWithoutRoadMapsInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -35195,7 +35273,7 @@ export namespace Prisma {
   export type FeaturesUncheckedCreateWithoutRoadMapsInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -35365,6 +35443,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutRoadMapsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -35389,6 +35468,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutRoadMapsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -35574,6 +35654,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutFeaturesInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -35598,6 +35679,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutFeaturesInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -35686,7 +35768,7 @@ export namespace Prisma {
   export type FeaturesCreateWithoutChildFeaturesInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -35707,7 +35789,7 @@ export namespace Prisma {
   export type FeaturesUncheckedCreateWithoutChildFeaturesInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -35733,7 +35815,7 @@ export namespace Prisma {
   export type FeaturesCreateWithoutParentFeatureInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -35754,7 +35836,7 @@ export namespace Prisma {
   export type FeaturesUncheckedCreateWithoutParentFeatureInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -36022,6 +36104,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutFeaturesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -36046,6 +36129,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutFeaturesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -36146,7 +36230,7 @@ export namespace Prisma {
   export type FeaturesUpdateWithoutChildFeaturesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -36167,7 +36251,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateWithoutChildFeaturesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -36284,6 +36368,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutUserStoriesInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -36308,6 +36393,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutUserStoriesInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -36592,7 +36678,7 @@ export namespace Prisma {
   export type FeaturesCreateWithoutUserStoriesInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -36613,7 +36699,7 @@ export namespace Prisma {
   export type FeaturesUncheckedCreateWithoutUserStoriesInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -36734,6 +36820,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutUserStoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -36758,6 +36845,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutUserStoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -36998,6 +37086,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutSprintsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -37022,6 +37111,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutSprintsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -37204,7 +37294,7 @@ export namespace Prisma {
   export type FeaturesCreateWithoutSprintsInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -37225,7 +37315,7 @@ export namespace Prisma {
   export type FeaturesUncheckedCreateWithoutSprintsInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -37356,6 +37446,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutSprintsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -37380,6 +37471,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutSprintsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -37549,6 +37641,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutTasksInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -37573,6 +37666,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutTasksInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -37874,7 +37968,7 @@ export namespace Prisma {
   export type FeaturesCreateWithoutTasksInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -37895,7 +37989,7 @@ export namespace Prisma {
   export type FeaturesUncheckedCreateWithoutTasksInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -38020,6 +38114,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutTasksInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -38044,6 +38139,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutTasksInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -38296,6 +38392,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutSchemaFieldsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -38320,6 +38417,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutSchemaFieldsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -38438,6 +38536,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutSchemaFieldsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -38462,6 +38561,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutSchemaFieldsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -38545,6 +38645,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutTimeLogsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -38569,6 +38670,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutTimeLogsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -38713,6 +38815,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutTimeLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -38737,6 +38840,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutTimeLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -38877,6 +38981,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutCommentsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -38901,6 +39006,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutCommentsInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -39067,7 +39173,7 @@ export namespace Prisma {
   export type FeaturesCreateWithoutCommentsInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -39088,7 +39194,7 @@ export namespace Prisma {
   export type FeaturesUncheckedCreateWithoutCommentsInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -39311,6 +39417,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -39335,6 +39442,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -39494,7 +39602,7 @@ export namespace Prisma {
   export type FeaturesUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -39515,7 +39623,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -39746,6 +39854,7 @@ export namespace Prisma {
   export type ProjectsCreateWithoutFilesInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -39770,6 +39879,7 @@ export namespace Prisma {
   export type ProjectsUncheckedCreateWithoutFilesInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -39860,6 +39970,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -39884,6 +39995,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -39913,6 +40025,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -39937,6 +40050,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -40032,6 +40146,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutFilesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -40056,6 +40171,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutFilesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -40158,6 +40274,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40182,6 +40299,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40394,6 +40512,7 @@ export namespace Prisma {
   export type ProjectsCreateManyCreatorInput = {
     id?: string
     name: string
+    ordre?: number
     description?: string | null
     image?: string | null
     status?: $Enums.Status
@@ -40407,7 +40526,7 @@ export namespace Prisma {
   export type FeaturesCreateManyCreatorInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -40483,6 +40602,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -40646,6 +40766,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -40670,6 +40791,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -40694,6 +40816,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateManyWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -40708,6 +40831,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -40732,6 +40856,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -40756,6 +40881,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateManyWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -40769,7 +40895,7 @@ export namespace Prisma {
   export type FeaturesUpdateWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -40790,7 +40916,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -40811,7 +40937,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateManyWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -41033,6 +41159,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41057,6 +41184,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41081,6 +41209,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41354,6 +41483,7 @@ export namespace Prisma {
   export type ProjectsUpdateWithoutTeamsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -41378,6 +41508,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateWithoutTeamsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -41402,6 +41533,7 @@ export namespace Prisma {
   export type ProjectsUncheckedUpdateManyWithoutTeamsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -41416,7 +41548,7 @@ export namespace Prisma {
   export type FeaturesCreateManyProjectInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -41461,6 +41593,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -41654,7 +41787,7 @@ export namespace Prisma {
   export type FeaturesUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -41675,7 +41808,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -41696,7 +41829,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -41819,6 +41952,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41843,6 +41977,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41867,6 +42002,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42188,6 +42324,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42212,6 +42349,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42236,6 +42374,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42257,7 +42396,7 @@ export namespace Prisma {
   export type FeaturesUpdateWithoutRoadMapsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -42278,7 +42417,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateWithoutRoadMapsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -42299,7 +42438,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateManyWithoutRoadMapsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -42477,7 +42616,7 @@ export namespace Prisma {
   export type FeaturesCreateManyParentFeatureInput = {
     id?: string
     name: string
-    ordrer?: number
+    order?: number
     description?: string | null
     status?: $Enums.Status
     priority?: number
@@ -42507,7 +42646,7 @@ export namespace Prisma {
   export type FeaturesUpdateWithoutParentFeatureInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -42528,7 +42667,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateWithoutParentFeatureInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -42549,7 +42688,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateManyWithoutParentFeatureInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -43045,7 +43184,7 @@ export namespace Prisma {
   export type FeaturesUpdateWithoutUserStoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -43066,7 +43205,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateWithoutUserStoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -43087,7 +43226,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateManyWithoutUserStoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -43333,7 +43472,7 @@ export namespace Prisma {
   export type FeaturesUpdateWithoutSprintsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -43354,7 +43493,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateWithoutSprintsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -43375,7 +43514,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateManyWithoutSprintsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -43733,7 +43872,7 @@ export namespace Prisma {
   export type FeaturesUpdateWithoutTasksInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -43754,7 +43893,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateWithoutTasksInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -43775,7 +43914,7 @@ export namespace Prisma {
   export type FeaturesUncheckedUpdateManyWithoutTasksInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    ordrer?: IntFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     priority?: IntFieldUpdateOperationsInput | number
@@ -44025,6 +44164,7 @@ export namespace Prisma {
     name: string
     extension?: string | null
     url: string
+    category?: string
     type: $Enums.FileType
     description?: string | null
     fonctionnalities?: string | null
@@ -44047,6 +44187,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44071,6 +44212,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44095,6 +44237,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     extension?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     type?: EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fonctionnalities?: NullableStringFieldUpdateOperationsInput | string | null

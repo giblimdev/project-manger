@@ -10,6 +10,7 @@ import TodoButton from "../TodoButton";
 import HeaderNav from "./HeaderNav";
 import Logo from "@/components/layout/header/Logo";
 import IsConected from "./IsConected";
+import DevNav from "@/components/dev/DevNav";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -96,6 +97,9 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <HeaderNav />
+            <div className="text-gray-600">
+              <DevNav />
+            </div>
           </nav>
 
           {/* Right Side Actions */}

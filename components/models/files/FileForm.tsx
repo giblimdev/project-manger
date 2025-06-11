@@ -28,6 +28,7 @@ const fileFormSchema = z.object({
   useby: z.string().nullable().optional(),
   script: z.string().nullable().optional(),
   version: z.string().nullable().optional(),
+  category: z.enum(["dossier", "file"]).default("dossier"), // ✅ Ajout du champ category
   order: z.coerce.number().int().min(1).default(100),
   devorder: z.coerce.number().int().min(1).default(100),
   status: z.nativeEnum(Status).default(Status.TODO),
@@ -59,6 +60,12 @@ const statusLabels: Record<Status, string> = {
   CANCELLED: "Annulé",
 };
 
+// ✅ Ajout des labels de catégorie
+const categoryLabels: Record<string, string> = {
+  dossier: "Dossier",
+  file: "Fichier",
+};
+
 type FileFormProps = {
   initialValues?: Files | null;
   onSubmit: (data: any) => Promise<void>;
@@ -88,6 +95,7 @@ export function FileForm({
     useby: initialValues?.useby || "",
     script: initialValues?.script || "",
     version: initialValues?.version || "1.0",
+    category: initialValues?.category || "dossier", // ✅ Ajout du champ category avec valeur par défaut
     order: initialValues?.order || 100,
     devorder: initialValues?.devorder || 100,
     status: initialValues?.status || Status.TODO,
@@ -189,6 +197,34 @@ export function FileForm({
               />
             </div>
 
+            {/* ✅ Catégorie - Nouveau champ ajouté */}
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                Catégorie *
+              </label>
+              <Select
+                value={formData.category}
+                onValueChange={(value) => handleChange("category", value)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.entries(categoryLabels).map(([key, label]) => (
+                    <SelectItem key={key} value={key}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {errors.category && (
+                <p className="text-red-500 text-sm mt-1">{errors.category}</p>
+              )}
+              <p className="text-xs text-gray-500 mt-1">
+                Définit si c'est un dossier ou un fichier
+              </p>
+            </div>
+
             {/* Type de fichier selon votre enum FileType */}
             <div>
               <label className="block text-sm font-medium mb-2">Type *</label>
@@ -239,7 +275,7 @@ export function FileForm({
               />
             </div>
 
-            {/* ✅ CORRECTION : Fichier parent selon la relation FileHierarchy */}
+            {/* Fichier parent selon la relation FileHierarchy */}
             <div>
               <label className="block text-sm font-medium mb-2">
                 Fichier parent
@@ -254,7 +290,6 @@ export function FileForm({
                   <SelectValue placeholder="Aucun parent (fichier racine)" />
                 </SelectTrigger>
                 <SelectContent>
-                  {/* ✅ CORRECTION : Utiliser "NONE" au lieu de "" */}
                   <SelectItem value="NONE">
                     Aucun parent (fichier racine)
                   </SelectItem>
