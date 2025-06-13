@@ -1,16 +1,9 @@
 // app/api/features/order/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
-// ✅ Pattern singleton pour éviter les problèmes d'initialisation
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
 
-const prisma = globalForPrisma.prisma ?? new PrismaClient();
-
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 // PATCH - Mettre à jour l'ordre des features (méthode recommandée)
 export async function PATCH(request: NextRequest) {

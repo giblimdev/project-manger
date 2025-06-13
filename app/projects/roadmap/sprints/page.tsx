@@ -1,7 +1,10 @@
-import React from "react";
+// @/app/projects/roadmap/sprints/page.tsx
 
-function page() {
-  return <div>ma page projects</div>;
+import React from 'react'
+
+export default function page() {
+  return (
+    <div><h1>@/app/projects/roadmap/sprints/page.tsx
+</h1></div>
+  )
 }
-
-export default page;

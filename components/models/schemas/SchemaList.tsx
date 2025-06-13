@@ -142,6 +142,9 @@ export function SchemaList({
     setShowForm(false);
   };
 
+
+
+
   //  onSave reçoit SchemaFormData, on adapte le state local
   const handleSchemaSaved = async (data: SchemaFormData) => {
     setIsLoading(true);
@@ -177,6 +180,10 @@ export function SchemaList({
     }
   };
 
+
+
+
+
   const handleDeleteSchema = (id: string) => {
     setSchemas((prev) => prev.filter((s) => s.id !== id));
     setHasOrderChanged(true);
@@ -187,7 +194,7 @@ export function SchemaList({
     switch (fieldType) {
       case FieldType.STRING:
         return <Type className="w-3 h-3" />;
-      case FieldType.INT:
+      case FieldType.INTEGER:
       case FieldType.FLOAT:
         return <Hash className="w-3 h-3" />;
       case FieldType.BOOLEAN:

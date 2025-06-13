@@ -1,15 +1,7 @@
 // app/api/features/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
-
-const prisma = globalForPrisma.prisma ?? new PrismaClient();
-
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+import { prisma } from "@/lib/prisma";
 
 // GET - Récupérer toutes les features d'un projet
 export async function GET(request: NextRequest) {
@@ -100,7 +92,8 @@ export async function POST(request: NextRequest) {
           .findUnique({
             where: { id: body.parentFeatureId },
           })
-          .then((parent: { projectId: any }) => {
+          .then((parent) => {
+            // parent est de type Features | null
             if (!parent) {
               throw new Error(
                 `Feature parente avec l'ID ${body.parentFeatureId} non trouvée`
@@ -122,7 +115,7 @@ export async function POST(request: NextRequest) {
           .findUnique({
             where: { id: body.creatorId },
           })
-          .then((user: any) => {
+          .then((user) => {
             if (!user) {
               throw new Error(
                 `Utilisateur avec l'ID ${body.creatorId} non trouvé`
@@ -193,7 +186,6 @@ export async function POST(request: NextRequest) {
         );
       }
     }
-
     return NextResponse.json(
       {
         success: false,
@@ -229,7 +221,7 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    // Validation des clés étrangères selon votre schéma
+    // Validation des clés étrangères
     const validationPromises = [];
 
     // Validation parentFeatureId (auto-référence)
@@ -240,7 +232,7 @@ export async function PUT(request: NextRequest) {
             .findUnique({
               where: { id: updateData.parentFeatureId },
             })
-            .then((parent: { id: any; projectId: any }) => {
+            .then((parent) => {
               if (!parent) {
                 throw new Error(
                   `Feature parente avec l'ID ${updateData.parentFeatureId} non trouvée`
@@ -268,7 +260,7 @@ export async function PUT(request: NextRequest) {
           .findUnique({
             where: { id: updateData.creatorId },
           })
-          .then((user: any) => {
+          .then((user) => {
             if (!user) {
               throw new Error(
                 `Utilisateur avec l'ID ${updateData.creatorId} non trouvé`
@@ -426,7 +418,7 @@ export async function DELETE(request: NextRequest) {
   }
 }
 
-// PATCH - Réorganiser l'ordre des features (optionnel - peut être géré par la route dédiée)
+// PATCH - Réorganiser l'ordre des features
 export async function PATCH(request: NextRequest) {
   try {
     const body = await request.json();

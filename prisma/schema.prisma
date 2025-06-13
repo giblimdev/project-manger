@@ -62,6 +62,7 @@ enum FieldType {
   DATETIME
   FLOAT
   JSON
+  ENUM
 }
 
 // Models authentification

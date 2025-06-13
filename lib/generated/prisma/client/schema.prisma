@@ -62,6 +62,7 @@ enum FieldType {
   DATETIME
   FLOAT
   JSON
+  ENUM
 }
 
 // Models authentification
@@ -301,12 +302,12 @@ model UserStory {
 model Sprints {
   id        String       @id @default(uuid())
   name      String
-  goal      String? // ← NOUVEAU CHAMP
+  goal      String?
   startDate DateTime
   endDate   DateTime
   status    SprintStatus @default(PLANNED)
-  projectId String // ← DÉPENDANCE PRINCIPALE
-  creatorId String? // ← NOUVEAU CHAMP
+  projectId String
+  creatorId String?
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
 

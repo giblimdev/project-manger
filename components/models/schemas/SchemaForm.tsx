@@ -1,3 +1,19 @@
+/*
+./components/models/schemas/SchemaForm.tsx:95:24
+Type error: Property 'INT' does not exist on type '{ STRING: "STRING"; INTEGER: "INTEGER"; BOOLEAN: "BOOLEAN"; DATE: "DATE"; DATETIME: "DATETIME"; FLOAT: "FLOAT"; JSON: "JSON"; }'.
+
+  93 |   const fieldTypeOptions = [
+  94 |     { value: FieldType.STRING, label: "Texte (STRING)" },
+> 95 |     { value: FieldType.INT, label: "Entier (INT)" },
+     |                        ^
+  96 |     { value: FieldType.FLOAT, label: "Décimal (FLOAT)" },
+  97 |     { value: FieldType.BOOLEAN, label: "Booléen (BOOLEAN)" },
+  98 |     { value: FieldType.DATETIME, label: "Date/Heure (DATETIME)" },
+Next.js build worker exited with code: 1 and signal: null
+PS C:\Users\jpheu\OneDrive - jean-philippe Heurteux\Bureau\clone\project-manger>
+*/
+
+
 // components/models/projects/SchemaForm.tsx
 
 "use client";
@@ -92,7 +108,7 @@ export function SchemaForm({
 
   const fieldTypeOptions = [
     { value: FieldType.STRING, label: "Texte (STRING)" },
-    { value: FieldType.INT, label: "Entier (INT)" },
+  { value: FieldType.INTEGER, label: "Entier (INTEGER)" }, // Correction ici
     { value: FieldType.FLOAT, label: "Décimal (FLOAT)" },
     { value: FieldType.BOOLEAN, label: "Booléen (BOOLEAN)" },
     { value: FieldType.DATETIME, label: "Date/Heure (DATETIME)" },
@@ -110,11 +126,12 @@ export function SchemaForm({
     {} as Record<FieldType, SchemaFields[]>
   );
 
-  const fieldTypeLabels = {
+  const fieldTypeLabels: Record<FieldType, string> = {
     [FieldType.STRING]: "Texte",
-    [FieldType.INT]: "Entier",
+    [FieldType.INTEGER]: "Entier",
     [FieldType.FLOAT]: "Décimal",
     [FieldType.BOOLEAN]: "Booléen",
+    [FieldType.DATE]: "Date",
     [FieldType.DATETIME]: "Date/Heure",
     [FieldType.JSON]: "JSON",
     [FieldType.ENUM]: "Énumération",
@@ -124,7 +141,7 @@ export function SchemaForm({
     switch (fieldType) {
       case FieldType.STRING:
         return ["", "N/A", "Non défini"];
-      case FieldType.INT:
+      case FieldType.INTEGER:
         return ["0", "1", "-1"];
       case FieldType.FLOAT:
         return ["0.0", "1.0", "-1.0"];

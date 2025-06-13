@@ -62,6 +62,7 @@ enum FieldType {
   DATETIME
   FLOAT
   JSON
+  ENUM
 }
 
 // Models authentification
@@ -200,6 +201,7 @@ model RoadMap {
   id            String    @id @default(uuid())
   title         String
   description   String
+  ordre         Int       @default(10)
   phase         String
   estimatedDays Int
   progress      Int       @default(0)
@@ -211,7 +213,7 @@ model RoadMap {
   endDate       DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  projectId     String // ← DÉPENDANCE PRINCIPALE
+  projectId     String
   creatorId     String?
 
   // Relations principales
@@ -300,12 +302,12 @@ model UserStory {
 model Sprints {
   id        String       @id @default(uuid())
   name      String
-  goal      String? // ← NOUVEAU CHAMP
+  goal      String?
   startDate DateTime
   endDate   DateTime
   status    SprintStatus @default(PLANNED)
-  projectId String // ← DÉPENDANCE PRINCIPALE
-  creatorId String? // ← NOUVEAU CHAMP
+  projectId String
+  creatorId String?
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
 

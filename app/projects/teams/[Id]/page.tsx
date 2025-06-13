@@ -1,4 +1,6 @@
-// @/app/projects/roadmap/sprints/[id]/page.tsx
+//@/app/projects/teams/[id]/page.ts
+
+
 
 import React from "react"; 
 
@@ -8,5 +10,9 @@ export default async function Page({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params;
-  return <div>projects/roadmap/sprints/[id] : {id}</div>;
+  return <div>projects/teams/[id] : {id}</div>;
 }
+
+
+
+

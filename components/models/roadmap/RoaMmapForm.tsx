@@ -1,5 +1,3 @@
-// components/models/roadmap/RoadMapForm.tsx
-
 import React, { useState, useEffect } from "react";
 import { RoadMap } from "@/lib/generated/prisma/client";
 
@@ -18,6 +16,7 @@ const defaultForm: RoadMapFormState = {
   phase: "",
   estimatedDays: 1,
   progress: 0,
+  ordre: 100, // <-- Ajouté pour correspondre au modèle Prisma
   deliverables: "",
   technologies: "",
   dependencies: "",
@@ -32,8 +31,8 @@ function dateToInput(d?: Date | null) {
   return d ? new Date(d).toISOString().slice(0, 10) : "";
 }
 
-function inputToDate(value: string): Date | undefined {
-  return value ? new Date(value) : undefined;
+function inputToDate(value: string): Date | null {
+  return value ? new Date(value) : null;
 }
 
 export default function RoadMapForm({
@@ -115,7 +114,6 @@ export default function RoadMapForm({
     }
   };
 
-  // Utilitaire pour afficher l'astérisque rouge sur les champs requis
   const Required = () => <span className="text-red-500 ml-1">*</span>;
 
   return (
@@ -203,6 +201,23 @@ export default function RoadMapForm({
             <option value="Moyenne">Moyenne</option>
             <option value="Basse">Basse</option>
           </select>
+        </div>
+
+        <div>
+          <label htmlFor="ordre" className="block font-semibold mb-1">
+            Ordre <Required />
+          </label>
+          <input
+            id="ordre"
+            type="number"
+            name="ordre"
+            value={form.ordre}
+            min={1}
+            onChange={handleChange}
+            required
+            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-blue-400 transition"
+            placeholder="Ordre d'affichage"
+          />
         </div>
 
         <div>

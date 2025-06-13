@@ -165,7 +165,8 @@ export const FieldType: {
   DATE: 'DATE',
   DATETIME: 'DATETIME',
   FLOAT: 'FLOAT',
-  JSON: 'JSON'
+  JSON: 'JSON',
+  ENUM: 'ENUM'
 };
 
 export type FieldType = (typeof FieldType)[keyof typeof FieldType]

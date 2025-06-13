@@ -36,10 +36,7 @@ const PostTaskSchema = z.object({
 // GET: Retrieve tasks with optional filtering and pagination
 export async function GET(req: NextRequest) {
   try {
-    const session = await getServerSession();
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    
 
     // Parse and validate query parameters
     const url = new URL(req.url);
@@ -54,12 +51,19 @@ export async function GET(req: NextRequest) {
     const { projectId, status, limit, offset, sortBy, sortOrder } =
       GetQuerySchema.parse(query);
 
+
+
+
+
+
+
+
     // Build Prisma query
     const where = {
       ...(projectId && { projectId }),
       ...(status && { status }),
     };
-    const orderBy = { [sortBy]: sortOrder };
+    const orderBy = { [sortBy as string]: sortOrder };
 
     // Fetch tasks
     const [tasks, total] = await Promise.all([
@@ -112,10 +116,7 @@ export async function GET(req: NextRequest) {
 // POST: Create a new task
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession();
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+   
 
     // Parse and validate request body
     const body = await req.json();

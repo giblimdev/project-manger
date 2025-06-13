@@ -1,44 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/lib/generated/prisma/client";
+import { PrismaClient, SprintStatus } from "@/lib/generated/prisma/client";
 import { z } from "zod";
-import { SprintStatus } from "@/lib/generated/prisma/client";
 
-// Initialize Prisma Client
 const prisma = new PrismaClient();
 
-// Validation schema for PUT request body
 const updateSprintSchema = z.object({
-  name: z.string().min(1, "Name is required").optional(),
+  name: z.string().min(1, "Le nom est requis").optional(),
   goal: z.string().optional(),
-  startDate: z.string().datetime().optional(),
-  endDate: z.string().datetime().optional(),
-  status: z
-    .enum([
-      SprintStatus.PLANNED,
-      SprintStatus.ACTIVE,
-      SprintStatus.COMPLETED,
-      SprintStatus.CANCELLED,
-    ])
-    .optional(),
+  startDate: z.coerce.date().optional(),
+  endDate: z.coerce.date().optional(),
+  status: z.nativeEnum(SprintStatus).optional(),
   projectId: z.string().uuid().optional(),
   creatorId: z.string().uuid().optional(),
 });
 
-// GET: Fetch a sprint by ID
+// GET : Récupérer un sprint par ID
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { sprintId: string } }
+  _request: NextRequest,
+  { params }: { params: Promise<{ sprintId: string }> }
 ) {
+  const { sprintId } = await params;
+
+  if (!sprintId) {
+    return NextResponse.json({ error: "Sprint ID requis" }, { status: 400 });
+  }
+
   try {
-    const { sprintId } = params;
-
-    if (!sprintId) {
-      return NextResponse.json(
-        { error: "Sprint ID is required" },
-        { status: 400 }
-      );
-    }
-
     const sprint = await prisma.sprints.findUnique({
       where: { id: sprintId },
       include: {
@@ -53,111 +40,81 @@ export async function GET(
     });
 
     if (!sprint) {
-      return NextResponse.json({ error: "Sprint not found" }, { status: 404 });
+      return NextResponse.json({ error: "Sprint introuvable" }, { status: 404 });
     }
 
     return NextResponse.json(sprint, { status: 200 });
   } catch (error) {
-    console.error("Error fetching sprint:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    console.error("Erreur lors de la récupération du sprint :", error);
+    return NextResponse.json({ error: "Erreur interne serveur" }, { status: 500 });
   }
 }
 
-// PUT: Update a sprint by ID
+// PUT : Mettre à jour un sprint par ID
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { sprintId: string } }
+  { params }: { params: Promise<{ sprintId: string }> }
 ) {
+  const { sprintId } = await params;
+
+  if (!sprintId) {
+    return NextResponse.json({ error: "Sprint ID requis" }, { status: 400 });
+  }
+
   try {
-    const { sprintId } = params;
-
-    if (!sprintId) {
-      return NextResponse.json(
-        { error: "Sprint ID is required" },
-        { status: 400 }
-      );
-    }
-
     const body = await request.json();
     const validation = updateSprintSchema.safeParse(body);
 
     if (!validation.success) {
       return NextResponse.json(
-        { error: "Invalid request body", details: validation.error.errors },
+        { error: "Corps de requête invalide", details: validation.error.errors },
         { status: 400 }
       );
     }
 
-    const sprint = await prisma.sprints.findUnique({
-      where: { id: sprintId },
-    });
-
+    const sprint = await prisma.sprints.findUnique({ where: { id: sprintId } });
     if (!sprint) {
-      return NextResponse.json({ error: "Sprint not found" }, { status: 404 });
+      return NextResponse.json({ error: "Sprint introuvable" }, { status: 404 });
     }
 
     const updatedSprint = await prisma.sprints.update({
       where: { id: sprintId },
       data: {
         ...validation.data,
-        startDate: validation.data.startDate
-          ? new Date(validation.data.startDate)
-          : undefined,
-        endDate: validation.data.endDate
-          ? new Date(validation.data.endDate)
-          : undefined,
+        startDate: validation.data.startDate ?? undefined,
+        endDate: validation.data.endDate ?? undefined,
       },
     });
 
     return NextResponse.json(updatedSprint, { status: 200 });
   } catch (error) {
-    console.error("Error updating sprint:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    console.error("Erreur lors de la mise à jour du sprint :", error);
+    return NextResponse.json({ error: "Erreur interne serveur" }, { status: 500 });
   }
 }
 
-// DELETE: Delete a sprint by ID
+// DELETE : Supprimer un sprint par ID
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { sprintId: string } }
+  _request: NextRequest,
+  { params }: { params: Promise<{ sprintId: string }> }
 ) {
+  const { sprintId } = await params;
+
+  if (!sprintId) {
+    return NextResponse.json({ error: "Sprint ID requis" }, { status: 400 });
+  }
+
   try {
-    const { sprintId } = params;
-
-    if (!sprintId) {
-      return NextResponse.json(
-        { error: "Sprint ID is required" },
-        { status: 400 }
-      );
-    }
-
-    const sprint = await prisma.sprints.findUnique({
-      where: { id: sprintId },
-    });
-
+    const sprint = await prisma.sprints.findUnique({ where: { id: sprintId } });
     if (!sprint) {
-      return NextResponse.json({ error: "Sprint not found" }, { status: 404 });
+      return NextResponse.json({ error: "Sprint introuvable" }, { status: 404 });
     }
 
-    await prisma.sprints.delete({
-      where: { id: sprintId },
-    });
+    await prisma.sprints.delete({ where: { id: sprintId } });
 
-    return NextResponse.json(
-      { message: "Sprint deleted successfully" },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: "Sprint supprimé avec succès" }, { status: 200 });
   } catch (error) {
-    console.error("Error deleting sprint:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    console.error("Erreur lors de la suppression du sprint :", error);
+    return NextResponse.json({ error: "Erreur interne serveur" }, { status: 500 });
   }
 }
