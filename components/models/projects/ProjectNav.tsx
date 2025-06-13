@@ -15,6 +15,7 @@ import {
   Timer,
   CheckSquare,
   LucideIcon,
+  FolderKanban,
 } from "lucide-react";
 
 interface NavItem {
@@ -27,54 +28,60 @@ interface NavItem {
 const navItems: NavItem[] = [
   {
     ordred: 1,
+    title: "PROJETS",
+    link: "/projets",
+    icon: FolderKanban,
+  },
+  {
+    ordred: 2,
     title: "Commentaires",
     link: "/comments",
     icon: MessageCircle,
   },
   {
-    ordred: 2,
+    ordred: 3,
     title: "Roadmap",
     link: "/projects/roadmap",
     icon: Map,
   },
   {
-    ordred: 3,
+    ordred: 4,
     title: "Architecture",
     link: "/projects/files",
     icon: FileCode,
   },
   {
-    ordred: 4,
+    ordred: 5,
     title: "Schéma",
     link: "/projects/schemas",
     icon: Database,
   },
   {
-    ordred: 5,
+    ordred: 6,
     title: "Features",
     link: "/projects/features",
     icon: Layers,
   },
   {
-    ordred: 6,
+    ordred: 7,
     title: "User Stories",
     link: "/projects/user-stories",
     icon: BookOpen,
   },
   {
-    ordred: 7,
+    ordred: 8,
     title: "Sprints",
     link: "/projects/sprints",
     icon: Timer,
   },
   {
-    ordred: 8,
+    ordred: 9,
     title: "Tasks",
     link: "/projects/tasks",
     icon: CheckSquare,
   },
   {
-    ordred: 9,
+    ordred: 10,
     title: "Teams",
     link: "/projects/teams",
     icon: Users,

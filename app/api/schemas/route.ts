@@ -1,16 +1,15 @@
-// app/api/schemas/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// Define FieldType enum to match your schema
-export enum FieldType {
+// Define FieldType enum to match Prisma schema (not exported to fix build error)
+enum FieldType {
   STRING = "STRING",
-  INT = "INT",
-  FLOAT = "FLOAT",
+  INTEGER = "INTEGER",
   BOOLEAN = "BOOLEAN",
+  DATE = "DATE",
   DATETIME = "DATETIME",
+  FLOAT = "FLOAT",
   JSON = "JSON",
-  ENUM = "ENUM",
 }
 
 // GET - Récupérer tous les schemas d'un projet
@@ -26,7 +25,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Récupération avec relations complètes selon votre modèle
     const schemas = await prisma.schemaFields.findMany({
       where: { projectId },
       orderBy: { order: "asc" },
@@ -103,7 +101,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validation du format du nom de champ[2]
+    // Validation du format du nom de champ
     const namePattern = /^[a-zA-Z][a-zA-Z0-9_]*$/;
     if (!namePattern.test(name)) {
       return NextResponse.json(
@@ -152,7 +150,7 @@ export async function POST(request: NextRequest) {
       const parentField = await prisma.schemaFields.findFirst({
         where: {
           id: parentFieldId,
-          projectId, // S'assurer que le parent est dans le même projet
+          projectId,
         },
       });
 
@@ -177,9 +175,8 @@ export async function POST(request: NextRequest) {
 
     // Création du schema avec transaction pour assurer la cohérence
     const schema = await prisma.$transaction(async (tx) => {
-      // Si aucun ordre spécifié, prendre le suivant
-      let finalOrder = parseInt(order);
-      if (!order) {
+      let finalOrder = parseInt(order as any, 10);
+      if (isNaN(finalOrder)) {
         const lastSchema = await tx.schemaFields.findFirst({
           where: { projectId },
           orderBy: { order: "desc" },
@@ -239,15 +236,14 @@ export async function POST(request: NextRequest) {
     console.error("Erreur POST schema:", error);
 
     // Gestion des erreurs Prisma spécifiques
-    if (typeof error === "object" && error !== null && "code" in error) {
-      if ((error as any).code === "P2002") {
+    if (error && typeof error === "object" && "code" in error) {
+      if (error.code === "P2002") {
         return NextResponse.json(
           { success: false, error: "Un champ avec ce nom existe déjà" },
           { status: 409 }
         );
       }
-
-      if ((error as any).code === "P2003") {
+      if (error.code === "P2003") {
         return NextResponse.json(
           {
             success: false,
@@ -396,13 +392,13 @@ export async function PUT(request: NextRequest) {
       where: { id },
       data: {
         name,
-        fieldType,
+        fieldType: fieldType || null,
         isRequired,
         isUnique,
         defaultValue: defaultValue || null,
         description: description || null,
         comment: comment || null,
-        order: parseInt(order),
+        order: order ? parseInt(order as any, 10) : undefined,
         parentFieldId: parentFieldId || null,
         updatedAt: new Date(),
       },
@@ -437,15 +433,16 @@ export async function PUT(request: NextRequest) {
       message: "Champ mis à jour avec succès",
     });
   } catch (error) {
-    if (typeof error === "object" && error !== null && "code" in error) {
-      if ((error as any).code === "P2002") {
+    console.error("Erreur PUT schema:", error);
+
+    if (error && typeof error === "object" && "code" in error) {
+      if (error.code === "P2002") {
         return NextResponse.json(
           { success: false, error: "Un champ avec ce nom existe déjà" },
           { status: 409 }
         );
       }
-
-      if ((error as any).code === "P2003") {
+      if (error.code === "P2003") {
         return NextResponse.json(
           { success: false, error: "Référence invalide" },
           { status: 400 }
@@ -465,12 +462,13 @@ function validateDefaultValue(value: string, fieldType: FieldType): boolean {
   switch (fieldType) {
     case FieldType.STRING:
       return true; // Toute chaîne est valide
-    case FieldType.INT:
+    case FieldType.INTEGER:
       return /^-?\d+$/.test(value);
     case FieldType.FLOAT:
       return /^-?\d*\.?\d+$/.test(value);
     case FieldType.BOOLEAN:
       return ["true", "false"].includes(value.toLowerCase());
+    case FieldType.DATE:
     case FieldType.DATETIME:
       return (
         ["now()", "CURRENT_TIMESTAMP"].includes(value) ||
@@ -483,8 +481,6 @@ function validateDefaultValue(value: string, fieldType: FieldType): boolean {
       } catch {
         return ["{}", "[]", "null"].includes(value);
       }
-    case FieldType.ENUM:
-      return /^[A-Z_]+$/.test(value); // Convention ENUM
     default:
       return true;
   }

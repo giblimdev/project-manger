@@ -62,11 +62,9 @@ enum FieldType {
   DATETIME
   FLOAT
   JSON
-  TEXT
-  UUID
 }
 
-// Models de base (inchangés)
+// Models authentification
 model User {
   id            String   @id @default(uuid())
   name          String?
@@ -170,6 +168,7 @@ model Teams {
 model Projects {
   id          String    @id @default(uuid())
   name        String
+  ordre       Int       @default(10)
   description String?
   image       String?
   status      Status    @default(TODO)
@@ -187,7 +186,6 @@ model Projects {
   userStories  UserStory[]
   sprints      Sprints[]
   files        Files[]
-  comments     Comments[]
   schemaFields SchemaFields[]
   roadMaps     RoadMap[]
   tasks        Tasks[]
@@ -245,7 +243,7 @@ model Features {
   endDate         DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
-  projectId       String // ← DÉPENDANCE PRINCIPALE
+  projectId       String
   creatorId       String?
   parentFeatureId String?
 
@@ -405,9 +403,10 @@ model Comments {
   id              String   @id @default(uuid())
   title           String
   content         String
+  order           Int      @default(100)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  projectId       String // ← DÉPENDANCE PRINCIPALE OBLIGATOIRE
+  thema           String?
   authorId        String
   parentCommentId String?
 
@@ -419,8 +418,7 @@ model Comments {
   roadMapId   String?
 
   // Relations principales
-  project Projects @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  author  User     @relation("CommentAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  author User @relation("CommentAuthor", fields: [authorId], references: [id], onDelete: Cascade)
 
   // Auto-référence hiérarchique
   parentComment Comments?  @relation("CommentHierarchy", fields: [parentCommentId], references: [id], onDelete: SetNull)
@@ -433,7 +431,6 @@ model Comments {
   sprint    Sprints?   @relation(fields: [sprintId], references: [id], onDelete: Cascade)
   roadMap   RoadMap?   @relation(fields: [roadMapId], references: [id], onDelete: Cascade)
 
-  @@index([projectId])
   @@map("comments")
 }
 

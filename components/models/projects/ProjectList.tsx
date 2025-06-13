@@ -166,8 +166,6 @@ export function ProjectList({
         teamIds: Array.isArray(data.teamIds) ? data.teamIds : [],
       };
 
-      console.log("📤 Données envoyées:", cleanedData);
-
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
@@ -224,7 +222,6 @@ export function ProjectList({
 
   return (
     <div className="space-y-6 p-3">
-      <h1 className="text-xl text-green-300">app/projects</h1>
       {safeProjects.length === 0 ? (
         <div className="text-center py-12">
           <div className="text-gray-400 text-6xl mb-4">📋</div>

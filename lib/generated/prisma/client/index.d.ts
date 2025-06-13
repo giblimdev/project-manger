@@ -2548,7 +2548,6 @@ export namespace Prisma {
     userStories: number
     sprints: number
     files: number
-    comments: number
     schemaFields: number
     roadMaps: number
     tasks: number
@@ -2562,7 +2561,6 @@ export namespace Prisma {
     userStories?: boolean | ProjectsCountOutputTypeCountUserStoriesArgs
     sprints?: boolean | ProjectsCountOutputTypeCountSprintsArgs
     files?: boolean | ProjectsCountOutputTypeCountFilesArgs
-    comments?: boolean | ProjectsCountOutputTypeCountCommentsArgs
     schemaFields?: boolean | ProjectsCountOutputTypeCountSchemaFieldsArgs
     roadMaps?: boolean | ProjectsCountOutputTypeCountRoadMapsArgs
     tasks?: boolean | ProjectsCountOutputTypeCountTasksArgs
@@ -2620,13 +2618,6 @@ export namespace Prisma {
    */
   export type ProjectsCountOutputTypeCountFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FilesWhereInput
-  }
-
-  /**
-   * ProjectsCountOutputType without action
-   */
-  export type ProjectsCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CommentsWhereInput
   }
 
   /**
@@ -9471,7 +9462,6 @@ export namespace Prisma {
     userStories?: boolean | Projects$userStoriesArgs<ExtArgs>
     sprints?: boolean | Projects$sprintsArgs<ExtArgs>
     files?: boolean | Projects$filesArgs<ExtArgs>
-    comments?: boolean | Projects$commentsArgs<ExtArgs>
     schemaFields?: boolean | Projects$schemaFieldsArgs<ExtArgs>
     roadMaps?: boolean | Projects$roadMapsArgs<ExtArgs>
     tasks?: boolean | Projects$tasksArgs<ExtArgs>
@@ -9535,7 +9525,6 @@ export namespace Prisma {
     userStories?: boolean | Projects$userStoriesArgs<ExtArgs>
     sprints?: boolean | Projects$sprintsArgs<ExtArgs>
     files?: boolean | Projects$filesArgs<ExtArgs>
-    comments?: boolean | Projects$commentsArgs<ExtArgs>
     schemaFields?: boolean | Projects$schemaFieldsArgs<ExtArgs>
     roadMaps?: boolean | Projects$roadMapsArgs<ExtArgs>
     tasks?: boolean | Projects$tasksArgs<ExtArgs>
@@ -9559,7 +9548,6 @@ export namespace Prisma {
       userStories: Prisma.$UserStoryPayload<ExtArgs>[]
       sprints: Prisma.$SprintsPayload<ExtArgs>[]
       files: Prisma.$FilesPayload<ExtArgs>[]
-      comments: Prisma.$CommentsPayload<ExtArgs>[]
       schemaFields: Prisma.$SchemaFieldsPayload<ExtArgs>[]
       roadMaps: Prisma.$RoadMapPayload<ExtArgs>[]
       tasks: Prisma.$TasksPayload<ExtArgs>[]
@@ -9979,7 +9967,6 @@ export namespace Prisma {
     userStories<T extends Projects$userStoriesArgs<ExtArgs> = {}>(args?: Subset<T, Projects$userStoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserStoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sprints<T extends Projects$sprintsArgs<ExtArgs> = {}>(args?: Subset<T, Projects$sprintsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SprintsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     files<T extends Projects$filesArgs<ExtArgs> = {}>(args?: Subset<T, Projects$filesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    comments<T extends Projects$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Projects$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     schemaFields<T extends Projects$schemaFieldsArgs<ExtArgs> = {}>(args?: Subset<T, Projects$schemaFieldsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchemaFieldsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     roadMaps<T extends Projects$roadMapsArgs<ExtArgs> = {}>(args?: Subset<T, Projects$roadMapsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoadMapPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tasks<T extends Projects$tasksArgs<ExtArgs> = {}>(args?: Subset<T, Projects$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -10582,30 +10569,6 @@ export namespace Prisma {
   }
 
   /**
-   * Projects.comments
-   */
-  export type Projects$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-    where?: CommentsWhereInput
-    orderBy?: CommentsOrderByWithRelationInput | CommentsOrderByWithRelationInput[]
-    cursor?: CommentsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
-  }
-
-  /**
    * Projects.schemaFields
    */
   export type Projects$schemaFieldsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10733,11 +10696,13 @@ export namespace Prisma {
   }
 
   export type RoadMapAvgAggregateOutputType = {
+    ordre: number | null
     estimatedDays: number | null
     progress: number | null
   }
 
   export type RoadMapSumAggregateOutputType = {
+    ordre: number | null
     estimatedDays: number | null
     progress: number | null
   }
@@ -10746,6 +10711,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
+    ordre: number | null
     phase: string | null
     estimatedDays: number | null
     progress: number | null
@@ -10765,6 +10731,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
+    ordre: number | null
     phase: string | null
     estimatedDays: number | null
     progress: number | null
@@ -10784,6 +10751,7 @@ export namespace Prisma {
     id: number
     title: number
     description: number
+    ordre: number
     phase: number
     estimatedDays: number
     progress: number
@@ -10802,11 +10770,13 @@ export namespace Prisma {
 
 
   export type RoadMapAvgAggregateInputType = {
+    ordre?: true
     estimatedDays?: true
     progress?: true
   }
 
   export type RoadMapSumAggregateInputType = {
+    ordre?: true
     estimatedDays?: true
     progress?: true
   }
@@ -10815,6 +10785,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    ordre?: true
     phase?: true
     estimatedDays?: true
     progress?: true
@@ -10834,6 +10805,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    ordre?: true
     phase?: true
     estimatedDays?: true
     progress?: true
@@ -10853,6 +10825,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    ordre?: true
     phase?: true
     estimatedDays?: true
     progress?: true
@@ -10959,6 +10932,7 @@ export namespace Prisma {
     id: string
     title: string
     description: string
+    ordre: number
     phase: string
     estimatedDays: number
     progress: number
@@ -10997,6 +10971,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    ordre?: boolean
     phase?: boolean
     estimatedDays?: boolean
     progress?: boolean
@@ -11025,6 +11000,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    ordre?: boolean
     phase?: boolean
     estimatedDays?: boolean
     progress?: boolean
@@ -11046,6 +11022,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    ordre?: boolean
     phase?: boolean
     estimatedDays?: boolean
     progress?: boolean
@@ -11067,6 +11044,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    ordre?: boolean
     phase?: boolean
     estimatedDays?: boolean
     progress?: boolean
@@ -11082,7 +11060,7 @@ export namespace Prisma {
     creatorId?: boolean
   }
 
-  export type RoadMapOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "phase" | "estimatedDays" | "progress" | "deliverables" | "technologies" | "dependencies" | "priority" | "startDate" | "endDate" | "createdAt" | "updatedAt" | "projectId" | "creatorId", ExtArgs["result"]["roadMap"]>
+  export type RoadMapOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "ordre" | "phase" | "estimatedDays" | "progress" | "deliverables" | "technologies" | "dependencies" | "priority" | "startDate" | "endDate" | "createdAt" | "updatedAt" | "projectId" | "creatorId", ExtArgs["result"]["roadMap"]>
   export type RoadMapInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectsDefaultArgs<ExtArgs>
     creator?: boolean | RoadMap$creatorArgs<ExtArgs>
@@ -11119,6 +11097,7 @@ export namespace Prisma {
       id: string
       title: string
       description: string
+      ordre: number
       phase: string
       estimatedDays: number
       progress: number
@@ -11566,6 +11545,7 @@ export namespace Prisma {
     readonly id: FieldRef<"RoadMap", 'String'>
     readonly title: FieldRef<"RoadMap", 'String'>
     readonly description: FieldRef<"RoadMap", 'String'>
+    readonly ordre: FieldRef<"RoadMap", 'Int'>
     readonly phase: FieldRef<"RoadMap", 'String'>
     readonly estimatedDays: FieldRef<"RoadMap", 'Int'>
     readonly progress: FieldRef<"RoadMap", 'Int'>
@@ -20112,17 +20092,28 @@ export namespace Prisma {
 
   export type AggregateComments = {
     _count: CommentsCountAggregateOutputType | null
+    _avg: CommentsAvgAggregateOutputType | null
+    _sum: CommentsSumAggregateOutputType | null
     _min: CommentsMinAggregateOutputType | null
     _max: CommentsMaxAggregateOutputType | null
+  }
+
+  export type CommentsAvgAggregateOutputType = {
+    order: number | null
+  }
+
+  export type CommentsSumAggregateOutputType = {
+    order: number | null
   }
 
   export type CommentsMinAggregateOutputType = {
     id: string | null
     title: string | null
     content: string | null
+    order: number | null
     createdAt: Date | null
     updatedAt: Date | null
-    projectId: string | null
+    thema: string | null
     authorId: string | null
     parentCommentId: string | null
     featureId: string | null
@@ -20136,9 +20127,10 @@ export namespace Prisma {
     id: string | null
     title: string | null
     content: string | null
+    order: number | null
     createdAt: Date | null
     updatedAt: Date | null
-    projectId: string | null
+    thema: string | null
     authorId: string | null
     parentCommentId: string | null
     featureId: string | null
@@ -20152,9 +20144,10 @@ export namespace Prisma {
     id: number
     title: number
     content: number
+    order: number
     createdAt: number
     updatedAt: number
-    projectId: number
+    thema: number
     authorId: number
     parentCommentId: number
     featureId: number
@@ -20166,13 +20159,22 @@ export namespace Prisma {
   }
 
 
+  export type CommentsAvgAggregateInputType = {
+    order?: true
+  }
+
+  export type CommentsSumAggregateInputType = {
+    order?: true
+  }
+
   export type CommentsMinAggregateInputType = {
     id?: true
     title?: true
     content?: true
+    order?: true
     createdAt?: true
     updatedAt?: true
-    projectId?: true
+    thema?: true
     authorId?: true
     parentCommentId?: true
     featureId?: true
@@ -20186,9 +20188,10 @@ export namespace Prisma {
     id?: true
     title?: true
     content?: true
+    order?: true
     createdAt?: true
     updatedAt?: true
-    projectId?: true
+    thema?: true
     authorId?: true
     parentCommentId?: true
     featureId?: true
@@ -20202,9 +20205,10 @@ export namespace Prisma {
     id?: true
     title?: true
     content?: true
+    order?: true
     createdAt?: true
     updatedAt?: true
-    projectId?: true
+    thema?: true
     authorId?: true
     parentCommentId?: true
     featureId?: true
@@ -20253,6 +20257,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: CommentsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CommentsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: CommentsMinAggregateInputType
@@ -20283,6 +20299,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CommentsCountAggregateInputType | true
+    _avg?: CommentsAvgAggregateInputType
+    _sum?: CommentsSumAggregateInputType
     _min?: CommentsMinAggregateInputType
     _max?: CommentsMaxAggregateInputType
   }
@@ -20291,9 +20309,10 @@ export namespace Prisma {
     id: string
     title: string
     content: string
+    order: number
     createdAt: Date
     updatedAt: Date
-    projectId: string
+    thema: string | null
     authorId: string
     parentCommentId: string | null
     featureId: string | null
@@ -20302,6 +20321,8 @@ export namespace Prisma {
     sprintId: string | null
     roadMapId: string | null
     _count: CommentsCountAggregateOutputType | null
+    _avg: CommentsAvgAggregateOutputType | null
+    _sum: CommentsSumAggregateOutputType | null
     _min: CommentsMinAggregateOutputType | null
     _max: CommentsMaxAggregateOutputType | null
   }
@@ -20324,9 +20345,10 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    order?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    projectId?: boolean
+    thema?: boolean
     authorId?: boolean
     parentCommentId?: boolean
     featureId?: boolean
@@ -20334,7 +20356,6 @@ export namespace Prisma {
     taskId?: boolean
     sprintId?: boolean
     roadMapId?: boolean
-    project?: boolean | ProjectsDefaultArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     parentComment?: boolean | Comments$parentCommentArgs<ExtArgs>
     childComments?: boolean | Comments$childCommentsArgs<ExtArgs>
@@ -20350,9 +20371,10 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    order?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    projectId?: boolean
+    thema?: boolean
     authorId?: boolean
     parentCommentId?: boolean
     featureId?: boolean
@@ -20360,7 +20382,6 @@ export namespace Prisma {
     taskId?: boolean
     sprintId?: boolean
     roadMapId?: boolean
-    project?: boolean | ProjectsDefaultArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     parentComment?: boolean | Comments$parentCommentArgs<ExtArgs>
     feature?: boolean | Comments$featureArgs<ExtArgs>
@@ -20374,9 +20395,10 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    order?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    projectId?: boolean
+    thema?: boolean
     authorId?: boolean
     parentCommentId?: boolean
     featureId?: boolean
@@ -20384,7 +20406,6 @@ export namespace Prisma {
     taskId?: boolean
     sprintId?: boolean
     roadMapId?: boolean
-    project?: boolean | ProjectsDefaultArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     parentComment?: boolean | Comments$parentCommentArgs<ExtArgs>
     feature?: boolean | Comments$featureArgs<ExtArgs>
@@ -20398,9 +20419,10 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    order?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    projectId?: boolean
+    thema?: boolean
     authorId?: boolean
     parentCommentId?: boolean
     featureId?: boolean
@@ -20410,9 +20432,8 @@ export namespace Prisma {
     roadMapId?: boolean
   }
 
-  export type CommentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "createdAt" | "updatedAt" | "projectId" | "authorId" | "parentCommentId" | "featureId" | "userStoryId" | "taskId" | "sprintId" | "roadMapId", ExtArgs["result"]["comments"]>
+  export type CommentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "order" | "createdAt" | "updatedAt" | "thema" | "authorId" | "parentCommentId" | "featureId" | "userStoryId" | "taskId" | "sprintId" | "roadMapId", ExtArgs["result"]["comments"]>
   export type CommentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | ProjectsDefaultArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     parentComment?: boolean | Comments$parentCommentArgs<ExtArgs>
     childComments?: boolean | Comments$childCommentsArgs<ExtArgs>
@@ -20424,7 +20445,6 @@ export namespace Prisma {
     _count?: boolean | CommentsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CommentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | ProjectsDefaultArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     parentComment?: boolean | Comments$parentCommentArgs<ExtArgs>
     feature?: boolean | Comments$featureArgs<ExtArgs>
@@ -20434,7 +20454,6 @@ export namespace Prisma {
     roadMap?: boolean | Comments$roadMapArgs<ExtArgs>
   }
   export type CommentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | ProjectsDefaultArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     parentComment?: boolean | Comments$parentCommentArgs<ExtArgs>
     feature?: boolean | Comments$featureArgs<ExtArgs>
@@ -20447,7 +20466,6 @@ export namespace Prisma {
   export type $CommentsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Comments"
     objects: {
-      project: Prisma.$ProjectsPayload<ExtArgs>
       author: Prisma.$UserPayload<ExtArgs>
       parentComment: Prisma.$CommentsPayload<ExtArgs> | null
       childComments: Prisma.$CommentsPayload<ExtArgs>[]
@@ -20461,9 +20479,10 @@ export namespace Prisma {
       id: string
       title: string
       content: string
+      order: number
       createdAt: Date
       updatedAt: Date
-      projectId: string
+      thema: string | null
       authorId: string
       parentCommentId: string | null
       featureId: string | null
@@ -20865,7 +20884,6 @@ export namespace Prisma {
    */
   export interface Prisma__CommentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    project<T extends ProjectsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectsDefaultArgs<ExtArgs>>): Prisma__ProjectsClient<$Result.GetResult<Prisma.$ProjectsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     parentComment<T extends Comments$parentCommentArgs<ExtArgs> = {}>(args?: Subset<T, Comments$parentCommentArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     childComments<T extends Comments$childCommentsArgs<ExtArgs> = {}>(args?: Subset<T, Comments$childCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -20906,9 +20924,10 @@ export namespace Prisma {
     readonly id: FieldRef<"Comments", 'String'>
     readonly title: FieldRef<"Comments", 'String'>
     readonly content: FieldRef<"Comments", 'String'>
+    readonly order: FieldRef<"Comments", 'Int'>
     readonly createdAt: FieldRef<"Comments", 'DateTime'>
     readonly updatedAt: FieldRef<"Comments", 'DateTime'>
-    readonly projectId: FieldRef<"Comments", 'String'>
+    readonly thema: FieldRef<"Comments", 'String'>
     readonly authorId: FieldRef<"Comments", 'String'>
     readonly parentCommentId: FieldRef<"Comments", 'String'>
     readonly featureId: FieldRef<"Comments", 'String'>
@@ -24026,6 +24045,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     description: 'description',
+    ordre: 'ordre',
     phase: 'phase',
     estimatedDays: 'estimatedDays',
     progress: 'progress',
@@ -24151,9 +24171,10 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     content: 'content',
+    order: 'order',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    projectId: 'projectId',
+    thema: 'thema',
     authorId: 'authorId',
     parentCommentId: 'parentCommentId',
     featureId: 'featureId',
@@ -24759,7 +24780,6 @@ export namespace Prisma {
     userStories?: UserStoryListRelationFilter
     sprints?: SprintsListRelationFilter
     files?: FilesListRelationFilter
-    comments?: CommentsListRelationFilter
     schemaFields?: SchemaFieldsListRelationFilter
     roadMaps?: RoadMapListRelationFilter
     tasks?: TasksListRelationFilter
@@ -24786,7 +24806,6 @@ export namespace Prisma {
     userStories?: UserStoryOrderByRelationAggregateInput
     sprints?: SprintsOrderByRelationAggregateInput
     files?: FilesOrderByRelationAggregateInput
-    comments?: CommentsOrderByRelationAggregateInput
     schemaFields?: SchemaFieldsOrderByRelationAggregateInput
     roadMaps?: RoadMapOrderByRelationAggregateInput
     tasks?: TasksOrderByRelationAggregateInput
@@ -24816,7 +24835,6 @@ export namespace Prisma {
     userStories?: UserStoryListRelationFilter
     sprints?: SprintsListRelationFilter
     files?: FilesListRelationFilter
-    comments?: CommentsListRelationFilter
     schemaFields?: SchemaFieldsListRelationFilter
     roadMaps?: RoadMapListRelationFilter
     tasks?: TasksListRelationFilter
@@ -24868,6 +24886,7 @@ export namespace Prisma {
     id?: StringFilter<"RoadMap"> | string
     title?: StringFilter<"RoadMap"> | string
     description?: StringFilter<"RoadMap"> | string
+    ordre?: IntFilter<"RoadMap"> | number
     phase?: StringFilter<"RoadMap"> | string
     estimatedDays?: IntFilter<"RoadMap"> | number
     progress?: IntFilter<"RoadMap"> | number
@@ -24895,6 +24914,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    ordre?: SortOrder
     phase?: SortOrder
     estimatedDays?: SortOrder
     progress?: SortOrder
@@ -24925,6 +24945,7 @@ export namespace Prisma {
     NOT?: RoadMapWhereInput | RoadMapWhereInput[]
     title?: StringFilter<"RoadMap"> | string
     description?: StringFilter<"RoadMap"> | string
+    ordre?: IntFilter<"RoadMap"> | number
     phase?: StringFilter<"RoadMap"> | string
     estimatedDays?: IntFilter<"RoadMap"> | number
     progress?: IntFilter<"RoadMap"> | number
@@ -24952,6 +24973,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    ordre?: SortOrder
     phase?: SortOrder
     estimatedDays?: SortOrder
     progress?: SortOrder
@@ -24979,6 +25001,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"RoadMap"> | string
     title?: StringWithAggregatesFilter<"RoadMap"> | string
     description?: StringWithAggregatesFilter<"RoadMap"> | string
+    ordre?: IntWithAggregatesFilter<"RoadMap"> | number
     phase?: StringWithAggregatesFilter<"RoadMap"> | string
     estimatedDays?: IntWithAggregatesFilter<"RoadMap"> | number
     progress?: IntWithAggregatesFilter<"RoadMap"> | number
@@ -25631,9 +25654,10 @@ export namespace Prisma {
     id?: StringFilter<"Comments"> | string
     title?: StringFilter<"Comments"> | string
     content?: StringFilter<"Comments"> | string
+    order?: IntFilter<"Comments"> | number
     createdAt?: DateTimeFilter<"Comments"> | Date | string
     updatedAt?: DateTimeFilter<"Comments"> | Date | string
-    projectId?: StringFilter<"Comments"> | string
+    thema?: StringNullableFilter<"Comments"> | string | null
     authorId?: StringFilter<"Comments"> | string
     parentCommentId?: StringNullableFilter<"Comments"> | string | null
     featureId?: StringNullableFilter<"Comments"> | string | null
@@ -25641,7 +25665,6 @@ export namespace Prisma {
     taskId?: StringNullableFilter<"Comments"> | string | null
     sprintId?: StringNullableFilter<"Comments"> | string | null
     roadMapId?: StringNullableFilter<"Comments"> | string | null
-    project?: XOR<ProjectsScalarRelationFilter, ProjectsWhereInput>
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     parentComment?: XOR<CommentsNullableScalarRelationFilter, CommentsWhereInput> | null
     childComments?: CommentsListRelationFilter
@@ -25656,9 +25679,10 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    order?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    projectId?: SortOrder
+    thema?: SortOrderInput | SortOrder
     authorId?: SortOrder
     parentCommentId?: SortOrderInput | SortOrder
     featureId?: SortOrderInput | SortOrder
@@ -25666,7 +25690,6 @@ export namespace Prisma {
     taskId?: SortOrderInput | SortOrder
     sprintId?: SortOrderInput | SortOrder
     roadMapId?: SortOrderInput | SortOrder
-    project?: ProjectsOrderByWithRelationInput
     author?: UserOrderByWithRelationInput
     parentComment?: CommentsOrderByWithRelationInput
     childComments?: CommentsOrderByRelationAggregateInput
@@ -25684,9 +25707,10 @@ export namespace Prisma {
     NOT?: CommentsWhereInput | CommentsWhereInput[]
     title?: StringFilter<"Comments"> | string
     content?: StringFilter<"Comments"> | string
+    order?: IntFilter<"Comments"> | number
     createdAt?: DateTimeFilter<"Comments"> | Date | string
     updatedAt?: DateTimeFilter<"Comments"> | Date | string
-    projectId?: StringFilter<"Comments"> | string
+    thema?: StringNullableFilter<"Comments"> | string | null
     authorId?: StringFilter<"Comments"> | string
     parentCommentId?: StringNullableFilter<"Comments"> | string | null
     featureId?: StringNullableFilter<"Comments"> | string | null
@@ -25694,7 +25718,6 @@ export namespace Prisma {
     taskId?: StringNullableFilter<"Comments"> | string | null
     sprintId?: StringNullableFilter<"Comments"> | string | null
     roadMapId?: StringNullableFilter<"Comments"> | string | null
-    project?: XOR<ProjectsScalarRelationFilter, ProjectsWhereInput>
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     parentComment?: XOR<CommentsNullableScalarRelationFilter, CommentsWhereInput> | null
     childComments?: CommentsListRelationFilter
@@ -25709,9 +25732,10 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    order?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    projectId?: SortOrder
+    thema?: SortOrderInput | SortOrder
     authorId?: SortOrder
     parentCommentId?: SortOrderInput | SortOrder
     featureId?: SortOrderInput | SortOrder
@@ -25720,8 +25744,10 @@ export namespace Prisma {
     sprintId?: SortOrderInput | SortOrder
     roadMapId?: SortOrderInput | SortOrder
     _count?: CommentsCountOrderByAggregateInput
+    _avg?: CommentsAvgOrderByAggregateInput
     _max?: CommentsMaxOrderByAggregateInput
     _min?: CommentsMinOrderByAggregateInput
+    _sum?: CommentsSumOrderByAggregateInput
   }
 
   export type CommentsScalarWhereWithAggregatesInput = {
@@ -25731,9 +25757,10 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Comments"> | string
     title?: StringWithAggregatesFilter<"Comments"> | string
     content?: StringWithAggregatesFilter<"Comments"> | string
+    order?: IntWithAggregatesFilter<"Comments"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Comments"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Comments"> | Date | string
-    projectId?: StringWithAggregatesFilter<"Comments"> | string
+    thema?: StringNullableWithAggregatesFilter<"Comments"> | string | null
     authorId?: StringWithAggregatesFilter<"Comments"> | string
     parentCommentId?: StringNullableWithAggregatesFilter<"Comments"> | string | null
     featureId?: StringNullableWithAggregatesFilter<"Comments"> | string | null
@@ -26461,7 +26488,6 @@ export namespace Prisma {
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
@@ -26487,7 +26513,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
@@ -26513,7 +26538,6 @@ export namespace Prisma {
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
@@ -26539,7 +26563,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
@@ -26594,6 +26617,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -26619,6 +26643,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -26644,6 +26669,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -26669,6 +26695,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -26694,6 +26721,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -26713,6 +26741,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -26730,6 +26759,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -27428,9 +27458,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectsCreateNestedOneWithoutCommentsInput
+    thema?: string | null
     author: UserCreateNestedOneWithoutAuthoredCommentsInput
     parentComment?: CommentsCreateNestedOneWithoutChildCommentsInput
     childComments?: CommentsCreateNestedManyWithoutParentCommentInput
@@ -27445,9 +27476,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -27462,9 +27494,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectsUpdateOneRequiredWithoutCommentsNestedInput
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     author?: UserUpdateOneRequiredWithoutAuthoredCommentsNestedInput
     parentComment?: CommentsUpdateOneWithoutChildCommentsNestedInput
     childComments?: CommentsUpdateManyWithoutParentCommentNestedInput
@@ -27479,9 +27512,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27496,9 +27530,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -27512,17 +27547,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CommentsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28368,6 +28406,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    ordre?: SortOrder
     phase?: SortOrder
     estimatedDays?: SortOrder
     progress?: SortOrder
@@ -28384,6 +28423,7 @@ export namespace Prisma {
   }
 
   export type RoadMapAvgOrderByAggregateInput = {
+    ordre?: SortOrder
     estimatedDays?: SortOrder
     progress?: SortOrder
   }
@@ -28392,6 +28432,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    ordre?: SortOrder
     phase?: SortOrder
     estimatedDays?: SortOrder
     progress?: SortOrder
@@ -28411,6 +28452,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    ordre?: SortOrder
     phase?: SortOrder
     estimatedDays?: SortOrder
     progress?: SortOrder
@@ -28427,6 +28469,7 @@ export namespace Prisma {
   }
 
   export type RoadMapSumOrderByAggregateInput = {
+    ordre?: SortOrder
     estimatedDays?: SortOrder
     progress?: SortOrder
   }
@@ -28801,9 +28844,10 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    order?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    projectId?: SortOrder
+    thema?: SortOrder
     authorId?: SortOrder
     parentCommentId?: SortOrder
     featureId?: SortOrder
@@ -28813,13 +28857,18 @@ export namespace Prisma {
     roadMapId?: SortOrder
   }
 
+  export type CommentsAvgOrderByAggregateInput = {
+    order?: SortOrder
+  }
+
   export type CommentsMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    order?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    projectId?: SortOrder
+    thema?: SortOrder
     authorId?: SortOrder
     parentCommentId?: SortOrder
     featureId?: SortOrder
@@ -28833,9 +28882,10 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    order?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    projectId?: SortOrder
+    thema?: SortOrder
     authorId?: SortOrder
     parentCommentId?: SortOrder
     featureId?: SortOrder
@@ -28843,6 +28893,10 @@ export namespace Prisma {
     taskId?: SortOrder
     sprintId?: SortOrder
     roadMapId?: SortOrder
+  }
+
+  export type CommentsSumOrderByAggregateInput = {
+    order?: SortOrder
   }
 
   export type EnumFileTypeFilter<$PrismaModel = never> = {
@@ -29858,13 +29912,6 @@ export namespace Prisma {
     connect?: FilesWhereUniqueInput | FilesWhereUniqueInput[]
   }
 
-  export type CommentsCreateNestedManyWithoutProjectInput = {
-    create?: XOR<CommentsCreateWithoutProjectInput, CommentsUncheckedCreateWithoutProjectInput> | CommentsCreateWithoutProjectInput[] | CommentsUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: CommentsCreateOrConnectWithoutProjectInput | CommentsCreateOrConnectWithoutProjectInput[]
-    createMany?: CommentsCreateManyProjectInputEnvelope
-    connect?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
-  }
-
   export type SchemaFieldsCreateNestedManyWithoutProjectInput = {
     create?: XOR<SchemaFieldsCreateWithoutProjectInput, SchemaFieldsUncheckedCreateWithoutProjectInput> | SchemaFieldsCreateWithoutProjectInput[] | SchemaFieldsUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: SchemaFieldsCreateOrConnectWithoutProjectInput | SchemaFieldsCreateOrConnectWithoutProjectInput[]
@@ -29931,13 +29978,6 @@ export namespace Prisma {
     connectOrCreate?: FilesCreateOrConnectWithoutProjectInput | FilesCreateOrConnectWithoutProjectInput[]
     createMany?: FilesCreateManyProjectInputEnvelope
     connect?: FilesWhereUniqueInput | FilesWhereUniqueInput[]
-  }
-
-  export type CommentsUncheckedCreateNestedManyWithoutProjectInput = {
-    create?: XOR<CommentsCreateWithoutProjectInput, CommentsUncheckedCreateWithoutProjectInput> | CommentsCreateWithoutProjectInput[] | CommentsUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: CommentsCreateOrConnectWithoutProjectInput | CommentsCreateOrConnectWithoutProjectInput[]
-    createMany?: CommentsCreateManyProjectInputEnvelope
-    connect?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
   }
 
   export type SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput = {
@@ -30070,20 +30110,6 @@ export namespace Prisma {
     update?: FilesUpdateWithWhereUniqueWithoutProjectInput | FilesUpdateWithWhereUniqueWithoutProjectInput[]
     updateMany?: FilesUpdateManyWithWhereWithoutProjectInput | FilesUpdateManyWithWhereWithoutProjectInput[]
     deleteMany?: FilesScalarWhereInput | FilesScalarWhereInput[]
-  }
-
-  export type CommentsUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<CommentsCreateWithoutProjectInput, CommentsUncheckedCreateWithoutProjectInput> | CommentsCreateWithoutProjectInput[] | CommentsUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: CommentsCreateOrConnectWithoutProjectInput | CommentsCreateOrConnectWithoutProjectInput[]
-    upsert?: CommentsUpsertWithWhereUniqueWithoutProjectInput | CommentsUpsertWithWhereUniqueWithoutProjectInput[]
-    createMany?: CommentsCreateManyProjectInputEnvelope
-    set?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
-    disconnect?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
-    delete?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
-    connect?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
-    update?: CommentsUpdateWithWhereUniqueWithoutProjectInput | CommentsUpdateWithWhereUniqueWithoutProjectInput[]
-    updateMany?: CommentsUpdateManyWithWhereWithoutProjectInput | CommentsUpdateManyWithWhereWithoutProjectInput[]
-    deleteMany?: CommentsScalarWhereInput | CommentsScalarWhereInput[]
   }
 
   export type SchemaFieldsUpdateManyWithoutProjectNestedInput = {
@@ -30222,20 +30248,6 @@ export namespace Prisma {
     update?: FilesUpdateWithWhereUniqueWithoutProjectInput | FilesUpdateWithWhereUniqueWithoutProjectInput[]
     updateMany?: FilesUpdateManyWithWhereWithoutProjectInput | FilesUpdateManyWithWhereWithoutProjectInput[]
     deleteMany?: FilesScalarWhereInput | FilesScalarWhereInput[]
-  }
-
-  export type CommentsUncheckedUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<CommentsCreateWithoutProjectInput, CommentsUncheckedCreateWithoutProjectInput> | CommentsCreateWithoutProjectInput[] | CommentsUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: CommentsCreateOrConnectWithoutProjectInput | CommentsCreateOrConnectWithoutProjectInput[]
-    upsert?: CommentsUpsertWithWhereUniqueWithoutProjectInput | CommentsUpsertWithWhereUniqueWithoutProjectInput[]
-    createMany?: CommentsCreateManyProjectInputEnvelope
-    set?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
-    disconnect?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
-    delete?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
-    connect?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
-    update?: CommentsUpdateWithWhereUniqueWithoutProjectInput | CommentsUpdateWithWhereUniqueWithoutProjectInput[]
-    updateMany?: CommentsUpdateManyWithWhereWithoutProjectInput | CommentsUpdateManyWithWhereWithoutProjectInput[]
-    deleteMany?: CommentsScalarWhereInput | CommentsScalarWhereInput[]
   }
 
   export type SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput = {
@@ -31792,12 +31804,6 @@ export namespace Prisma {
     update?: XOR<XOR<TasksUpdateToOneWithWhereWithoutTimeLogsInput, TasksUpdateWithoutTimeLogsInput>, TasksUncheckedUpdateWithoutTimeLogsInput>
   }
 
-  export type ProjectsCreateNestedOneWithoutCommentsInput = {
-    create?: XOR<ProjectsCreateWithoutCommentsInput, ProjectsUncheckedCreateWithoutCommentsInput>
-    connectOrCreate?: ProjectsCreateOrConnectWithoutCommentsInput
-    connect?: ProjectsWhereUniqueInput
-  }
-
   export type UserCreateNestedOneWithoutAuthoredCommentsInput = {
     create?: XOR<UserCreateWithoutAuthoredCommentsInput, UserUncheckedCreateWithoutAuthoredCommentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAuthoredCommentsInput
@@ -31852,14 +31858,6 @@ export namespace Prisma {
     connectOrCreate?: CommentsCreateOrConnectWithoutParentCommentInput | CommentsCreateOrConnectWithoutParentCommentInput[]
     createMany?: CommentsCreateManyParentCommentInputEnvelope
     connect?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
-  }
-
-  export type ProjectsUpdateOneRequiredWithoutCommentsNestedInput = {
-    create?: XOR<ProjectsCreateWithoutCommentsInput, ProjectsUncheckedCreateWithoutCommentsInput>
-    connectOrCreate?: ProjectsCreateOrConnectWithoutCommentsInput
-    upsert?: ProjectsUpsertWithoutCommentsInput
-    connect?: ProjectsWhereUniqueInput
-    update?: XOR<XOR<ProjectsUpdateToOneWithWhereWithoutCommentsInput, ProjectsUpdateWithoutCommentsInput>, ProjectsUncheckedUpdateWithoutCommentsInput>
   }
 
   export type UserUpdateOneRequiredWithoutAuthoredCommentsNestedInput = {
@@ -32493,7 +32491,6 @@ export namespace Prisma {
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
@@ -32518,7 +32515,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
@@ -32548,7 +32544,6 @@ export namespace Prisma {
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
@@ -32573,7 +32568,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
@@ -32746,9 +32740,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectsCreateNestedOneWithoutCommentsInput
+    thema?: string | null
     parentComment?: CommentsCreateNestedOneWithoutChildCommentsInput
     childComments?: CommentsCreateNestedManyWithoutParentCommentInput
     feature?: FeaturesCreateNestedOneWithoutCommentsInput
@@ -32762,9 +32757,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     parentCommentId?: string | null
     featureId?: string | null
     userStoryId?: string | null
@@ -32960,6 +32956,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -32984,6 +32981,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -33327,9 +33325,10 @@ export namespace Prisma {
     id?: StringFilter<"Comments"> | string
     title?: StringFilter<"Comments"> | string
     content?: StringFilter<"Comments"> | string
+    order?: IntFilter<"Comments"> | number
     createdAt?: DateTimeFilter<"Comments"> | Date | string
     updatedAt?: DateTimeFilter<"Comments"> | Date | string
-    projectId?: StringFilter<"Comments"> | string
+    thema?: StringNullableFilter<"Comments"> | string | null
     authorId?: StringFilter<"Comments"> | string
     parentCommentId?: StringNullableFilter<"Comments"> | string | null
     featureId?: StringNullableFilter<"Comments"> | string | null
@@ -33507,6 +33506,7 @@ export namespace Prisma {
     id?: StringFilter<"RoadMap"> | string
     title?: StringFilter<"RoadMap"> | string
     description?: StringFilter<"RoadMap"> | string
+    ordre?: IntFilter<"RoadMap"> | number
     phase?: StringFilter<"RoadMap"> | string
     estimatedDays?: IntFilter<"RoadMap"> | number
     progress?: IntFilter<"RoadMap"> | number
@@ -34062,7 +34062,6 @@ export namespace Prisma {
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
@@ -34087,7 +34086,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
@@ -34566,47 +34564,6 @@ export namespace Prisma {
     data: FilesCreateManyProjectInput | FilesCreateManyProjectInput[]
   }
 
-  export type CommentsCreateWithoutProjectInput = {
-    id?: string
-    title: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutAuthoredCommentsInput
-    parentComment?: CommentsCreateNestedOneWithoutChildCommentsInput
-    childComments?: CommentsCreateNestedManyWithoutParentCommentInput
-    feature?: FeaturesCreateNestedOneWithoutCommentsInput
-    userStory?: UserStoryCreateNestedOneWithoutCommentsInput
-    task?: TasksCreateNestedOneWithoutCommentsInput
-    sprint?: SprintsCreateNestedOneWithoutCommentsInput
-    roadMap?: RoadMapCreateNestedOneWithoutCommentsInput
-  }
-
-  export type CommentsUncheckedCreateWithoutProjectInput = {
-    id?: string
-    title: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-    parentCommentId?: string | null
-    featureId?: string | null
-    userStoryId?: string | null
-    taskId?: string | null
-    sprintId?: string | null
-    roadMapId?: string | null
-    childComments?: CommentsUncheckedCreateNestedManyWithoutParentCommentInput
-  }
-
-  export type CommentsCreateOrConnectWithoutProjectInput = {
-    where: CommentsWhereUniqueInput
-    create: XOR<CommentsCreateWithoutProjectInput, CommentsUncheckedCreateWithoutProjectInput>
-  }
-
-  export type CommentsCreateManyProjectInputEnvelope = {
-    data: CommentsCreateManyProjectInput | CommentsCreateManyProjectInput[]
-  }
-
   export type SchemaFieldsCreateWithoutProjectInput = {
     id?: string
     name: string
@@ -34652,6 +34609,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -34676,6 +34634,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -34940,22 +34899,6 @@ export namespace Prisma {
     data: XOR<FilesUpdateManyMutationInput, FilesUncheckedUpdateManyWithoutProjectInput>
   }
 
-  export type CommentsUpsertWithWhereUniqueWithoutProjectInput = {
-    where: CommentsWhereUniqueInput
-    update: XOR<CommentsUpdateWithoutProjectInput, CommentsUncheckedUpdateWithoutProjectInput>
-    create: XOR<CommentsCreateWithoutProjectInput, CommentsUncheckedCreateWithoutProjectInput>
-  }
-
-  export type CommentsUpdateWithWhereUniqueWithoutProjectInput = {
-    where: CommentsWhereUniqueInput
-    data: XOR<CommentsUpdateWithoutProjectInput, CommentsUncheckedUpdateWithoutProjectInput>
-  }
-
-  export type CommentsUpdateManyWithWhereWithoutProjectInput = {
-    where: CommentsScalarWhereInput
-    data: XOR<CommentsUpdateManyMutationInput, CommentsUncheckedUpdateManyWithoutProjectInput>
-  }
-
   export type SchemaFieldsUpsertWithWhereUniqueWithoutProjectInput = {
     where: SchemaFieldsWhereUniqueInput
     update: XOR<SchemaFieldsUpdateWithoutProjectInput, SchemaFieldsUncheckedUpdateWithoutProjectInput>
@@ -35058,7 +35001,6 @@ export namespace Prisma {
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
     timeLogs?: TimeLogCreateNestedManyWithoutProjectInput
@@ -35083,7 +35025,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
     timeLogs?: TimeLogUncheckedCreateNestedManyWithoutProjectInput
@@ -35157,9 +35098,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectsCreateNestedOneWithoutCommentsInput
+    thema?: string | null
     author: UserCreateNestedOneWithoutAuthoredCommentsInput
     parentComment?: CommentsCreateNestedOneWithoutChildCommentsInput
     childComments?: CommentsCreateNestedManyWithoutParentCommentInput
@@ -35173,9 +35115,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -35459,7 +35402,6 @@ export namespace Prisma {
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
     timeLogs?: TimeLogUpdateManyWithoutProjectNestedInput
@@ -35484,7 +35426,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
     timeLogs?: TimeLogUncheckedUpdateManyWithoutProjectNestedInput
@@ -35669,7 +35610,6 @@ export namespace Prisma {
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
@@ -35694,7 +35634,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
@@ -35867,9 +35806,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectsCreateNestedOneWithoutCommentsInput
+    thema?: string | null
     author: UserCreateNestedOneWithoutAuthoredCommentsInput
     parentComment?: CommentsCreateNestedOneWithoutChildCommentsInput
     childComments?: CommentsCreateNestedManyWithoutParentCommentInput
@@ -35883,9 +35823,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     userStoryId?: string | null
@@ -35908,6 +35849,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -35932,6 +35874,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -36119,7 +36062,6 @@ export namespace Prisma {
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
@@ -36144,7 +36086,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
@@ -36383,7 +36324,6 @@ export namespace Prisma {
     features?: FeaturesCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
@@ -36408,7 +36348,6 @@ export namespace Prisma {
     features?: FeaturesUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
@@ -36585,9 +36524,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectsCreateNestedOneWithoutCommentsInput
+    thema?: string | null
     author: UserCreateNestedOneWithoutAuthoredCommentsInput
     parentComment?: CommentsCreateNestedOneWithoutChildCommentsInput
     childComments?: CommentsCreateNestedManyWithoutParentCommentInput
@@ -36601,9 +36541,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -36626,6 +36567,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -36650,6 +36592,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -36835,7 +36778,6 @@ export namespace Prisma {
     features?: FeaturesUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
@@ -36860,7 +36802,6 @@ export namespace Prisma {
     features?: FeaturesUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
@@ -37101,7 +37042,6 @@ export namespace Prisma {
     features?: FeaturesCreateNestedManyWithoutProjectInput
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
@@ -37126,7 +37066,6 @@ export namespace Prisma {
     features?: FeaturesUncheckedCreateNestedManyWithoutProjectInput
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
@@ -37201,9 +37140,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectsCreateNestedOneWithoutCommentsInput
+    thema?: string | null
     author: UserCreateNestedOneWithoutAuthoredCommentsInput
     parentComment?: CommentsCreateNestedOneWithoutChildCommentsInput
     childComments?: CommentsCreateNestedManyWithoutParentCommentInput
@@ -37217,9 +37157,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -37242,6 +37183,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -37266,6 +37208,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -37461,7 +37404,6 @@ export namespace Prisma {
     features?: FeaturesUpdateManyWithoutProjectNestedInput
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
@@ -37486,7 +37428,6 @@ export namespace Prisma {
     features?: FeaturesUncheckedUpdateManyWithoutProjectNestedInput
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
@@ -37657,7 +37598,6 @@ export namespace Prisma {
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     timeLogs?: TimeLogCreateNestedManyWithoutProjectInput
@@ -37682,7 +37622,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     timeLogs?: TimeLogUncheckedCreateNestedManyWithoutProjectInput
@@ -37875,9 +37814,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectsCreateNestedOneWithoutCommentsInput
+    thema?: string | null
     author: UserCreateNestedOneWithoutAuthoredCommentsInput
     parentComment?: CommentsCreateNestedOneWithoutChildCommentsInput
     childComments?: CommentsCreateNestedManyWithoutParentCommentInput
@@ -37891,9 +37831,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -37916,6 +37857,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -37940,6 +37882,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -38130,7 +38073,6 @@ export namespace Prisma {
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     timeLogs?: TimeLogUpdateManyWithoutProjectNestedInput
@@ -38155,7 +38097,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     timeLogs?: TimeLogUncheckedUpdateManyWithoutProjectNestedInput
@@ -38408,7 +38349,6 @@ export namespace Prisma {
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
     timeLogs?: TimeLogCreateNestedManyWithoutProjectInput
@@ -38433,7 +38373,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
     timeLogs?: TimeLogUncheckedCreateNestedManyWithoutProjectInput
@@ -38552,7 +38491,6 @@ export namespace Prisma {
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
     timeLogs?: TimeLogUpdateManyWithoutProjectNestedInput
@@ -38577,7 +38515,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
     timeLogs?: TimeLogUncheckedUpdateManyWithoutProjectNestedInput
@@ -38661,7 +38598,6 @@ export namespace Prisma {
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
     files?: FilesCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
@@ -38686,7 +38622,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
     files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
@@ -38831,7 +38766,6 @@ export namespace Prisma {
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
@@ -38856,7 +38790,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
@@ -38978,61 +38911,6 @@ export namespace Prisma {
     sprints?: SprintsUncheckedUpdateManyWithoutTasksNestedInput
   }
 
-  export type ProjectsCreateWithoutCommentsInput = {
-    id?: string
-    name: string
-    ordre?: number
-    description?: string | null
-    image?: string | null
-    status?: $Enums.Status
-    priority?: number
-    startDate?: Date | string | null
-    endDate?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    creator?: UserCreateNestedOneWithoutCreatedProjectsInput
-    users?: UserCreateNestedManyWithoutProjectsInput
-    teams?: TeamsCreateNestedManyWithoutProjectsInput
-    features?: FeaturesCreateNestedManyWithoutProjectInput
-    userStories?: UserStoryCreateNestedManyWithoutProjectInput
-    sprints?: SprintsCreateNestedManyWithoutProjectInput
-    files?: FilesCreateNestedManyWithoutProjectInput
-    schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
-    roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
-    tasks?: TasksCreateNestedManyWithoutProjectInput
-    timeLogs?: TimeLogCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectsUncheckedCreateWithoutCommentsInput = {
-    id?: string
-    name: string
-    ordre?: number
-    description?: string | null
-    image?: string | null
-    status?: $Enums.Status
-    priority?: number
-    startDate?: Date | string | null
-    endDate?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    creatorId?: string | null
-    users?: UserUncheckedCreateNestedManyWithoutProjectsInput
-    teams?: TeamsUncheckedCreateNestedManyWithoutProjectsInput
-    features?: FeaturesUncheckedCreateNestedManyWithoutProjectInput
-    userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
-    sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
-    files?: FilesUncheckedCreateNestedManyWithoutProjectInput
-    schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
-    roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
-    tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
-    timeLogs?: TimeLogUncheckedCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectsCreateOrConnectWithoutCommentsInput = {
-    where: ProjectsWhereUniqueInput
-    create: XOR<ProjectsCreateWithoutCommentsInput, ProjectsUncheckedCreateWithoutCommentsInput>
-  }
-
   export type UserCreateWithoutAuthoredCommentsInput = {
     id?: string
     name?: string | null
@@ -39096,9 +38974,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectsCreateNestedOneWithoutCommentsInput
+    thema?: string | null
     author: UserCreateNestedOneWithoutAuthoredCommentsInput
     parentComment?: CommentsCreateNestedOneWithoutChildCommentsInput
     feature?: FeaturesCreateNestedOneWithoutCommentsInput
@@ -39112,9 +38991,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -39133,9 +39013,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectsCreateNestedOneWithoutCommentsInput
+    thema?: string | null
     author: UserCreateNestedOneWithoutAuthoredCommentsInput
     childComments?: CommentsCreateNestedManyWithoutParentCommentInput
     feature?: FeaturesCreateNestedOneWithoutCommentsInput
@@ -39149,9 +39030,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     featureId?: string | null
     userStoryId?: string | null
@@ -39354,6 +39236,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -39378,6 +39261,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -39401,67 +39285,6 @@ export namespace Prisma {
   export type RoadMapCreateOrConnectWithoutCommentsInput = {
     where: RoadMapWhereUniqueInput
     create: XOR<RoadMapCreateWithoutCommentsInput, RoadMapUncheckedCreateWithoutCommentsInput>
-  }
-
-  export type ProjectsUpsertWithoutCommentsInput = {
-    update: XOR<ProjectsUpdateWithoutCommentsInput, ProjectsUncheckedUpdateWithoutCommentsInput>
-    create: XOR<ProjectsCreateWithoutCommentsInput, ProjectsUncheckedCreateWithoutCommentsInput>
-    where?: ProjectsWhereInput
-  }
-
-  export type ProjectsUpdateToOneWithWhereWithoutCommentsInput = {
-    where?: ProjectsWhereInput
-    data: XOR<ProjectsUpdateWithoutCommentsInput, ProjectsUncheckedUpdateWithoutCommentsInput>
-  }
-
-  export type ProjectsUpdateWithoutCommentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ordre?: IntFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    priority?: IntFieldUpdateOperationsInput | number
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    creator?: UserUpdateOneWithoutCreatedProjectsNestedInput
-    users?: UserUpdateManyWithoutProjectsNestedInput
-    teams?: TeamsUpdateManyWithoutProjectsNestedInput
-    features?: FeaturesUpdateManyWithoutProjectNestedInput
-    userStories?: UserStoryUpdateManyWithoutProjectNestedInput
-    sprints?: SprintsUpdateManyWithoutProjectNestedInput
-    files?: FilesUpdateManyWithoutProjectNestedInput
-    schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
-    roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
-    tasks?: TasksUpdateManyWithoutProjectNestedInput
-    timeLogs?: TimeLogUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectsUncheckedUpdateWithoutCommentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ordre?: IntFieldUpdateOperationsInput | number
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    priority?: IntFieldUpdateOperationsInput | number
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
-    users?: UserUncheckedUpdateManyWithoutProjectsNestedInput
-    teams?: TeamsUncheckedUpdateManyWithoutProjectsNestedInput
-    features?: FeaturesUncheckedUpdateManyWithoutProjectNestedInput
-    userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
-    sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
-    files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
-    roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
-    tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
-    timeLogs?: TimeLogUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserUpsertWithoutAuthoredCommentsInput = {
@@ -39544,9 +39367,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectsUpdateOneRequiredWithoutCommentsNestedInput
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     author?: UserUpdateOneRequiredWithoutAuthoredCommentsNestedInput
     parentComment?: CommentsUpdateOneWithoutChildCommentsNestedInput
     feature?: FeaturesUpdateOneWithoutCommentsNestedInput
@@ -39560,9 +39384,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39807,6 +39632,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -39831,6 +39657,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -39869,7 +39696,6 @@ export namespace Prisma {
     features?: FeaturesCreateNestedManyWithoutProjectInput
     userStories?: UserStoryCreateNestedManyWithoutProjectInput
     sprints?: SprintsCreateNestedManyWithoutProjectInput
-    comments?: CommentsCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapCreateNestedManyWithoutProjectInput
     tasks?: TasksCreateNestedManyWithoutProjectInput
@@ -39894,7 +39720,6 @@ export namespace Prisma {
     features?: FeaturesUncheckedCreateNestedManyWithoutProjectInput
     userStories?: UserStoryUncheckedCreateNestedManyWithoutProjectInput
     sprints?: SprintsUncheckedCreateNestedManyWithoutProjectInput
-    comments?: CommentsUncheckedCreateNestedManyWithoutProjectInput
     schemaFields?: SchemaFieldsUncheckedCreateNestedManyWithoutProjectInput
     roadMaps?: RoadMapUncheckedCreateNestedManyWithoutProjectInput
     tasks?: TasksUncheckedCreateNestedManyWithoutProjectInput
@@ -40083,6 +39908,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -40107,6 +39933,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -40161,7 +39988,6 @@ export namespace Prisma {
     features?: FeaturesUpdateManyWithoutProjectNestedInput
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
@@ -40186,7 +40012,6 @@ export namespace Prisma {
     features?: FeaturesUncheckedUpdateManyWithoutProjectNestedInput
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
@@ -40571,9 +40396,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     parentCommentId?: string | null
     featureId?: string | null
     userStoryId?: string | null
@@ -40635,6 +40461,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -40781,7 +40608,6 @@ export namespace Prisma {
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
@@ -40806,7 +40632,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
@@ -40846,7 +40671,6 @@ export namespace Prisma {
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
@@ -40871,7 +40695,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
@@ -41066,9 +40889,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectsUpdateOneRequiredWithoutCommentsNestedInput
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     parentComment?: CommentsUpdateOneWithoutChildCommentsNestedInput
     childComments?: CommentsUpdateManyWithoutParentCommentNestedInput
     feature?: FeaturesUpdateOneWithoutCommentsNestedInput
@@ -41082,9 +40906,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
     userStoryId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41098,9 +40923,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
     userStoryId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41306,6 +41132,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -41330,6 +41157,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -41354,6 +41182,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -41498,7 +41327,6 @@ export namespace Prisma {
     userStories?: UserStoryUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUpdateManyWithoutProjectNestedInput
     files?: FilesUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUpdateManyWithoutProjectNestedInput
     tasks?: TasksUpdateManyWithoutProjectNestedInput
@@ -41523,7 +41351,6 @@ export namespace Prisma {
     userStories?: UserStoryUncheckedUpdateManyWithoutProjectNestedInput
     sprints?: SprintsUncheckedUpdateManyWithoutProjectNestedInput
     files?: FilesUncheckedUpdateManyWithoutProjectNestedInput
-    comments?: CommentsUncheckedUpdateManyWithoutProjectNestedInput
     schemaFields?: SchemaFieldsUncheckedUpdateManyWithoutProjectNestedInput
     roadMaps?: RoadMapUncheckedUpdateManyWithoutProjectNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutProjectNestedInput
@@ -41611,21 +41438,6 @@ export namespace Prisma {
     parentFileId?: string | null
   }
 
-  export type CommentsCreateManyProjectInput = {
-    id?: string
-    title: string
-    content: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-    parentCommentId?: string | null
-    featureId?: string | null
-    userStoryId?: string | null
-    taskId?: string | null
-    sprintId?: string | null
-    roadMapId?: string | null
-  }
-
   export type SchemaFieldsCreateManyProjectInput = {
     id?: string
     name: string
@@ -41645,6 +41457,7 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
+    ordre?: number
     phase: string
     estimatedDays: number
     progress?: number
@@ -42020,53 +41833,6 @@ export namespace Prisma {
     parentFileId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type CommentsUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutAuthoredCommentsNestedInput
-    parentComment?: CommentsUpdateOneWithoutChildCommentsNestedInput
-    childComments?: CommentsUpdateManyWithoutParentCommentNestedInput
-    feature?: FeaturesUpdateOneWithoutCommentsNestedInput
-    userStory?: UserStoryUpdateOneWithoutCommentsNestedInput
-    task?: TasksUpdateOneWithoutCommentsNestedInput
-    sprint?: SprintsUpdateOneWithoutCommentsNestedInput
-    roadMap?: RoadMapUpdateOneWithoutCommentsNestedInput
-  }
-
-  export type CommentsUncheckedUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
-    featureId?: NullableStringFieldUpdateOperationsInput | string | null
-    userStoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    taskId?: NullableStringFieldUpdateOperationsInput | string | null
-    sprintId?: NullableStringFieldUpdateOperationsInput | string | null
-    roadMapId?: NullableStringFieldUpdateOperationsInput | string | null
-    childComments?: CommentsUncheckedUpdateManyWithoutParentCommentNestedInput
-  }
-
-  export type CommentsUncheckedUpdateManyWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-    parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
-    featureId?: NullableStringFieldUpdateOperationsInput | string | null
-    userStoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    taskId?: NullableStringFieldUpdateOperationsInput | string | null
-    sprintId?: NullableStringFieldUpdateOperationsInput | string | null
-    roadMapId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type SchemaFieldsUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -42118,6 +41884,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -42142,6 +41909,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -42166,6 +41934,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -42261,9 +42030,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -42276,9 +42046,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectsUpdateOneRequiredWithoutCommentsNestedInput
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     author?: UserUpdateOneRequiredWithoutAuthoredCommentsNestedInput
     parentComment?: CommentsUpdateOneWithoutChildCommentsNestedInput
     childComments?: CommentsUpdateManyWithoutParentCommentNestedInput
@@ -42292,9 +42063,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42308,9 +42080,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42632,9 +42405,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     userStoryId?: string | null
@@ -42704,9 +42478,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectsUpdateOneRequiredWithoutCommentsNestedInput
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     author?: UserUpdateOneRequiredWithoutAuthoredCommentsNestedInput
     parentComment?: CommentsUpdateOneWithoutChildCommentsNestedInput
     childComments?: CommentsUpdateManyWithoutParentCommentNestedInput
@@ -42720,9 +42495,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     userStoryId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42736,9 +42512,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     userStoryId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42751,6 +42528,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -42775,6 +42553,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -42799,6 +42578,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -42996,9 +42776,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -43071,9 +42852,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectsUpdateOneRequiredWithoutCommentsNestedInput
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     author?: UserUpdateOneRequiredWithoutAuthoredCommentsNestedInput
     parentComment?: CommentsUpdateOneWithoutChildCommentsNestedInput
     childComments?: CommentsUpdateManyWithoutParentCommentNestedInput
@@ -43087,9 +42869,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43103,9 +42886,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43118,6 +42902,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -43142,6 +42927,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -43166,6 +42952,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -43344,9 +43131,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -43359,9 +43147,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectsUpdateOneRequiredWithoutCommentsNestedInput
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     author?: UserUpdateOneRequiredWithoutAuthoredCommentsNestedInput
     parentComment?: CommentsUpdateOneWithoutChildCommentsNestedInput
     childComments?: CommentsUpdateManyWithoutParentCommentNestedInput
@@ -43375,9 +43164,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43391,9 +43181,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43406,6 +43197,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -43430,6 +43222,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -43454,6 +43247,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -43667,9 +43461,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     parentCommentId?: string | null
     featureId?: string | null
@@ -43759,9 +43554,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectsUpdateOneRequiredWithoutCommentsNestedInput
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     author?: UserUpdateOneRequiredWithoutAuthoredCommentsNestedInput
     parentComment?: CommentsUpdateOneWithoutChildCommentsNestedInput
     childComments?: CommentsUpdateManyWithoutParentCommentNestedInput
@@ -43775,9 +43571,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43791,9 +43588,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     parentCommentId?: NullableStringFieldUpdateOperationsInput | string | null
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43806,6 +43604,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -43830,6 +43629,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -43854,6 +43654,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -44101,9 +43902,10 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    order?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId: string
+    thema?: string | null
     authorId: string
     featureId?: string | null
     userStoryId?: string | null
@@ -44116,9 +43918,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectsUpdateOneRequiredWithoutCommentsNestedInput
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     author?: UserUpdateOneRequiredWithoutAuthoredCommentsNestedInput
     childComments?: CommentsUpdateManyWithoutParentCommentNestedInput
     feature?: FeaturesUpdateOneWithoutCommentsNestedInput
@@ -44132,9 +43935,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
     userStoryId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44148,9 +43952,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
+    thema?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
     featureId?: NullableStringFieldUpdateOperationsInput | string | null
     userStoryId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44259,6 +44064,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -44283,6 +44089,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number
@@ -44307,6 +44114,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
     phase?: StringFieldUpdateOperationsInput | string
     estimatedDays?: IntFieldUpdateOperationsInput | number
     progress?: IntFieldUpdateOperationsInput | number

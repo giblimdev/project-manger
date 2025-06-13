@@ -30,7 +30,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-// Type du formulaire (doit être identique à celui utilisé dans SchemaForm)
+// Type du formulaire
 type SchemaFormData = {
   name: string;
   fieldType: FieldType;
@@ -142,7 +142,7 @@ export function SchemaList({
     setShowForm(false);
   };
 
-  // Correction ici : onSave reçoit SchemaFormData, on adapte le state local
+  //  onSave reçoit SchemaFormData, on adapte le state local
   const handleSchemaSaved = async (data: SchemaFormData) => {
     setIsLoading(true);
     try {
