@@ -483,8 +483,3 @@ model ActivityLogs {
 
   @@map("activity_logs")
 }
-
-generator erd {
-  provider = "prisma-erd-generator"
-  output   = "erd.svg"
-}
