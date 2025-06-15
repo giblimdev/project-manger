@@ -483,5 +483,3 @@ model ActivityLogs {
 
   @@map("activity_logs")
 }
-
-

@@ -1,5 +1,3 @@
-// components/models/files/FileForm.tsx
-
 "use client";
 import React, { useState, useEffect } from "react";
 import { Files, FileType, Status } from "@/lib/generated/prisma/client";
@@ -28,7 +26,7 @@ const fileFormSchema = z.object({
   useby: z.string().nullable().optional(),
   script: z.string().nullable().optional(),
   version: z.string().nullable().optional(),
-  category: z.enum(["dossier", "file"]).default("dossier"), // ✅ Ajout du champ category
+  category: z.enum(["dossier", "file"]).default("dossier"),
   order: z.coerce.number().int().min(1).default(100),
   devorder: z.coerce.number().int().min(1).default(100),
   status: z.nativeEnum(Status).default(Status.TODO),
@@ -60,7 +58,6 @@ const statusLabels: Record<Status, string> = {
   CANCELLED: "Annulé",
 };
 
-// ✅ Ajout des labels de catégorie
 const categoryLabels: Record<string, string> = {
   dossier: "Dossier",
   file: "Fichier",
@@ -72,7 +69,7 @@ type FileFormProps = {
   loading: boolean;
   projectId: string;
   onCancel?: () => void;
-  availableFiles?: Files[]; // Pour la sélection du fichier parent
+  availableFiles?: Files[];
 };
 
 export function FileForm({
@@ -95,7 +92,7 @@ export function FileForm({
     useby: initialValues?.useby || "",
     script: initialValues?.script || "",
     version: initialValues?.version || "1.0",
-    category: initialValues?.category || "dossier", // ✅ Ajout du champ category avec valeur par défaut
+    category: initialValues?.category || "dossier",
     order: initialValues?.order || 100,
     devorder: initialValues?.devorder || 100,
     status: initialValues?.status || Status.TODO,
@@ -104,21 +101,60 @@ export function FileForm({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Filtrer les fichiers disponibles pour éviter la sélection circulaire
-  const filteredParentFiles = availableFiles.filter((file) => {
-    // Exclure le fichier actuel (en cas d'édition)
-    if (initialValues && file.id === initialValues.id) return false;
-
-    // Exclure les fichiers enfants du fichier actuel pour éviter les boucles
-    if (initialValues) {
-      const isChildFile = checkIfChildFile(
-        file.id,
-        initialValues.id,
-        availableFiles
-      );
-      if (isChildFile) return false;
+  // Fonction pour construire l'URL automatiquement
+  const buildFileUrl = (
+    parentId: string | null | undefined,
+    name: string,
+    extension: string,
+    files: Files[]
+  ): string => {
+    if (!parentId) {
+      return `${name}${extension ? `.${extension}` : ""}`;
     }
 
+    const parentFile = files.find((f) => f.id === parentId);
+    if (!parentFile) {
+      return `${name}${extension ? `.${extension}` : ""}`;
+    }
+
+    // Construit le chemin complet du parent
+    let parentPath = parentFile.url;
+    let currentParentId = parentFile.parentFileId;
+
+    while (currentParentId) {
+      const nextParent = files.find((f) => f.id === currentParentId);
+      if (!nextParent) break;
+      parentPath = `${nextParent.url}/${parentPath}`;
+      currentParentId = nextParent.parentFileId;
+    }
+
+    return `${parentPath}/${name}${extension ? `.${extension}` : ""}`;
+  };
+
+  // Met à jour l'URL quand le parent, le nom ou l'extension change
+  useEffect(() => {
+    const newUrl = buildFileUrl(
+      formData.parentFileId,
+      formData.name,
+      formData.extension,
+      availableFiles
+    );
+    setFormData((prev) => ({ ...prev, url: newUrl }));
+  }, [
+    formData.parentFileId,
+    formData.name,
+    formData.extension,
+    availableFiles,
+  ]);
+
+  // Filtrer les fichiers disponibles pour éviter la sélection circulaire
+  const filteredParentFiles = availableFiles.filter((file) => {
+    if (initialValues && file.id === initialValues.id) return false;
+    if (
+      initialValues &&
+      checkIfChildFile(file.id, initialValues.id, availableFiles)
+    )
+      return false;
     return true;
   });
 
@@ -126,7 +162,6 @@ export function FileForm({
     e.preventDefault();
     setErrors({});
 
-    // Nettoyage des données selon votre schéma
     const cleanedData = {
       ...formData,
       extension: formData.extension.trim() || null,
@@ -197,7 +232,7 @@ export function FileForm({
               />
             </div>
 
-            {/* ✅ Catégorie - Nouveau champ ajouté */}
+            {/* Catégorie */}
             <div>
               <label className="block text-sm font-medium mb-2">
                 Catégorie *
@@ -220,12 +255,9 @@ export function FileForm({
               {errors.category && (
                 <p className="text-red-500 text-sm mt-1">{errors.category}</p>
               )}
-              <p className="text-xs text-gray-500 mt-1">
-                Définit si c'est un dossier ou un fichier
-              </p>
             </div>
 
-            {/* Type de fichier selon votre enum FileType */}
+            {/* Type de fichier */}
             <div>
               <label className="block text-sm font-medium mb-2">Type *</label>
               <Select
@@ -245,7 +277,7 @@ export function FileForm({
               </Select>
             </div>
 
-            {/* Statut selon votre enum Status */}
+            {/* Statut */}
             <div>
               <label className="block text-sm font-medium mb-2">Statut</label>
               <Select
@@ -275,7 +307,7 @@ export function FileForm({
               />
             </div>
 
-            {/* Fichier parent selon la relation FileHierarchy */}
+            {/* Fichier parent */}
             <div>
               <label className="block text-sm font-medium mb-2">
                 Fichier parent
@@ -305,9 +337,6 @@ export function FileForm({
                   ))}
                 </SelectContent>
               </Select>
-              <p className="text-xs text-gray-500 mt-1">
-                Définit la hiérarchie selon la relation FileHierarchy
-              </p>
             </div>
           </div>
 
@@ -316,20 +345,16 @@ export function FileForm({
             <label className="block text-sm font-medium mb-2">URL *</label>
             <Input
               value={formData.url}
-              onChange={(e) => handleChange("url", e.target.value)}
-              placeholder="/components/ui/Button.tsx"
-              className={errors.url ? "border-red-500" : ""}
+              readOnly
+              className="bg-gray-100 cursor-not-allowed"
             />
-            {errors.url && (
-              <p className="text-red-500 text-sm mt-1">{errors.url}</p>
-            )}
             <p className="text-xs text-gray-500 mt-1">
-              Chemin relatif ou URL complète du fichier
+              Chemin construit automatiquement à partir de la hiérarchie
             </p>
           </div>
         </div>
 
-        {/* Organisation selon votre schéma */}
+        {/* Organisation */}
         <div className="bg-gray-50 p-4 rounded-lg">
           <h3 className="text-lg font-medium mb-4">Organisation</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -345,9 +370,6 @@ export function FileForm({
                 min="1"
                 placeholder="100"
               />
-              <p className="text-xs text-gray-500 mt-1">
-                Ordre d'affichage dans l'interface (défaut: 100)
-              </p>
             </div>
 
             {/* Ordre de développement */}
@@ -364,14 +386,11 @@ export function FileForm({
                 min="1"
                 placeholder="100"
               />
-              <p className="text-xs text-gray-500 mt-1">
-                Ordre de développement recommandé (défaut: 100)
-              </p>
             </div>
           </div>
         </div>
 
-        {/* Description et fonctionnalités selon votre schéma */}
+        {/* Description et fonctionnalités */}
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-2">
@@ -398,7 +417,7 @@ export function FileForm({
           </div>
         </div>
 
-        {/* Dépendances selon votre schéma */}
+        {/* Dépendances */}
         <div className="bg-gray-50 p-4 rounded-lg">
           <h3 className="text-lg font-medium mb-4">Dépendances</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -409,9 +428,6 @@ export function FileForm({
                 onChange={(e) => handleChange("import", e.target.value)}
                 placeholder="react, clsx, ..."
               />
-              <p className="text-xs text-gray-500 mt-1">
-                Dépendances importées
-              </p>
             </div>
 
             <div>
@@ -421,7 +437,6 @@ export function FileForm({
                 onChange={(e) => handleChange("export", e.target.value)}
                 placeholder="Button, ButtonProps, ..."
               />
-              <p className="text-xs text-gray-500 mt-1">Éléments exportés</p>
             </div>
 
             <div>
@@ -433,14 +448,11 @@ export function FileForm({
                 onChange={(e) => handleChange("useby", e.target.value)}
                 placeholder="Header.tsx, Form.tsx, ..."
               />
-              <p className="text-xs text-gray-500 mt-1">
-                Fichiers qui l'utilisent
-              </p>
             </div>
           </div>
         </div>
 
-        {/* Script/Contenu selon votre schéma */}
+        {/* Script/Contenu */}
         <div>
           <label className="block text-sm font-medium mb-2">
             Script/Contenu
@@ -452,9 +464,6 @@ export function FileForm({
             className="font-mono text-sm"
             placeholder="import React from 'react'..."
           />
-          <p className="text-xs text-gray-500 mt-1">
-            Code source ou contenu du fichier
-          </p>
         </div>
 
         {/* Boutons d'action */}
